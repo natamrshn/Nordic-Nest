@@ -1,5 +1,5 @@
 import { input, search, searchIcon } from './searchbar.styles';
-import SearchIcon from '~/assets/icon search.svg';
+import SearchIcon from '~/assets/icon-search.svg';
 
 const SearchBar: React.FC = () => {
 	return (

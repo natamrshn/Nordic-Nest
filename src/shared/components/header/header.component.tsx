@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '~/assets/NordicNest.svg';
+import Logo from '~/assets/nordic-nest.svg';
 import { box, section } from './header.styles';
 import SearchBar from './components/searchBar/searchbar.component';
 import Navigation from './components/navigation/navigation.component';
