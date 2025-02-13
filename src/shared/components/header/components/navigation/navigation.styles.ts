@@ -7,13 +7,13 @@ export const navigation = css`
 	gap: 12px;
 `;
 
-export const navigationItem = css`
+export const navigationItem = (isLight: boolean) => css`
 	list-style: none;
 	padding-inline: 32.5px;
 	font-size: 16px;
 	font-weight: 400;
 
 	a {
-		color: ${colors.white};
+		color: ${isLight ? colors.black : colors.light_gray};
 	}
 `;
