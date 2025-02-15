@@ -1,7 +1,7 @@
 import { css } from '@emotion/css';
-import { colors, fonts } from '~shared/styles';
+import { colors} from '~shared/styles';
 
-export const box = css`
+export const box = (isLight: boolean) => css`
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -10,7 +10,11 @@ export const box = css`
 	display: flex;
 	justify-content: space-between;
 	flex-direction: row;
-	background: grey;
+	background: ${isLight ? colors.white : colors.black};
+	color: ${isLight ? colors.black : colors.white};
+	transition:
+		background 0.3s ease-in-out,
+		color 0.3s ease-in-out;
 `;
 
 export const section = css`
@@ -19,19 +23,19 @@ export const section = css`
 	align-items: center;
 `;
 
-export const buttonLogout = css`
+export const buttonLogout = (isLight: boolean) => css`
 	min-width: 88px;
-	color: ${colors.light_gray};
-	border: 1px solid ${colors.light_gray};
-	background: ${colors.white};
+	color: ${isLight ? colors.black : colors.light_gray};
+	border: 1px solid ${isLight ? colors.black : colors.light_gray};
+	background: ${isLight ? colors.light_gray : colors.white};
 
 	&:hover {
-		color: ${colors.white};
-		background: ${colors.light_gray};
+		color: ${isLight ? colors.white : colors.black};
+		background: ${isLight ? colors.black : colors.light_gray};
 	}
 `;
 
-export const button = css`
+export const button = (isLight: boolean) => css`
 	min-width: 88px;
-	border: 1px solid ${colors.light_blue};
+	border: 1px solid ${isLight ? colors.black : colors.light_blue};
 `;
