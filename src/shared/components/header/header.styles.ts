@@ -2,40 +2,21 @@ import { css } from '@emotion/css';
 import { colors, fonts } from '~shared/styles';
 
 export const box = css`
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 30px 40px;
 	display: flex;
 	justify-content: space-between;
-	padding: 20px 40px;
-`;
-
-export const divLogo = css`
-	display: flex;
-	gap: 20px;
-	align-items: center;
-`;
-
-export const spanLogo = css`
-	display: flex;
-	font-size: 40px;
-	font-family: ${fonts.logo};
-`;
-
-export const nav = css`
-	display: flex;
 	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	gap: 20px;
+	background: grey;
 `;
 
-export const link = css`
-	color: ${colors.black};
-	&:focus {
-		outline: none;
-	}
-	&:hover {
-		color: ${colors.light_blue};
-		text-decoration: none;
-	}
+export const section = css`
+	display: flex;
+	gap: 32px;
+	align-items: center;
 `;
 
 export const buttonLogout = css`
