@@ -1,7 +1,7 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { navigation, navigationItem } from './navigation.styles';
 import { useThemeStore } from '~shared/stores/theme.store';
-import React = require('react');
 
 const NAV_LINKS = [
 	{ path: '/shop', label: 'Shop' },
