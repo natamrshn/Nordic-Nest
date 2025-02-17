@@ -44,18 +44,18 @@ const Button: React.FunctionComponent<ButtonProps> = ({
 			{loading ? (
 				<Loader />
 			) : (
-				<span className={btnContentWrapper}>
+				<p className={btnContentWrapper}>
 					{icon && (
-						<span
+						<p
 							className={classNames(iconWrapper, {
 								[mr]: Boolean(text),
 							})}
 						>
 							{icon}
-						</span>
+						</p>
 					)}
 					{text}
-				</span>
+				</p>
 			)}
 		</button>
 	);

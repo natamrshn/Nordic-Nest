@@ -2,6 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import Slide1 from '~/assets/slider-1.png';
 import Slide2 from '~/assets/slider-2.png';
+import Text from './components/text.component';
 
 
 
@@ -14,23 +15,26 @@ const SliderComponent: React.FC = () => {
     dots: true,
     // autoplay: true,
 		infinite: true,
-		speed: 3500,
+		speed: 500,
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		arrows: false,
 	};
 
-	return (
-		<div className={sliderContainer}>
-			<Slider {...settings}>
-				{slides.map((src, index) => (
-					<div key={index} className={slideStyle}>
-						<img src={src} alt={`Slide ${index + 1}`} />
-					</div>
-				))}
-			</Slider>
-		</div>
-	);
+  return (
+		<>
+			<Text />
+			<div className={sliderContainer}>
+				<Slider {...settings}>
+					{slides.map((src, index) => (
+						<div key={index} className={slideStyle}>
+							<img src={src} alt={`Slide ${index + 1}`} />
+						</div>
+					))}
+				</Slider>
+			</div>
+		</>
+  );
 };
 
 export default SliderComponent;
