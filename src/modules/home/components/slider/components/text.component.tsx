@@ -1,14 +1,14 @@
 import Button from '~shared/components/button/button.component';
-import { box, heading } from './text.styles';
+import { box, button, heading, text } from './text.styles';
 
 const Text = () => {
 	return (
 		<div className={box}>
 			<h1 className={heading}>EXCLUSIVE LUXURY FURNITURE</h1>
-			<div>
+			<div className={button}>
 				<Button text="Shop Now" type="button" />
 			</div>
-			<p>Timeless design. Unmatched quality. Crafted for you</p>
+			<p className={text}>Timeless design. Unmatched quality. Crafted for you</p>
 		</div>
 	);
 };

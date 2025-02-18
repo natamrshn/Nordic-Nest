@@ -27,6 +27,7 @@ export const btnContentWrapper = css`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+  font-family:${fonts.secondary};
 `;
 
 export const iconWrapper = css`
