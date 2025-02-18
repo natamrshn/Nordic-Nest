@@ -1,7 +1,7 @@
 export const colors = Object.freeze({
 	transparent: 'transparent',
 	black: '#000',
-	white: '#f7f6f4',
+	white: '#F7F6F4',
 	imperial: '#5C3074',
 	ocean_blue: '#5C28CC',
 	nude: '#B8ADAD',

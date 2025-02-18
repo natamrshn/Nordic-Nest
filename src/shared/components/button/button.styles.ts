@@ -3,14 +3,14 @@ import { colors, fonts } from '../../styles';
 
 export const btnStyles = (disabled: boolean): string => {
 	return css`
-		padding: 10px;
-		font-size: 14px;
+		padding: 10px 116px;
+		font-size: 24px;
 		color: ${colors.white};
-		background-color: ${disabled ? colors.light_gray : colors.light_blue};
+		background-color: ${disabled ? colors.light_gray : 'transparent'};
 		font-family: ${fonts.primary};
-		border: none;
-		border-radius: 10px;
+		border: 1px solid ${colors.white};
 		text-align: center;
+		backdrop-filter: blur(30px);
 
 		&:hover {
 			cursor: pointer;
@@ -27,6 +27,7 @@ export const btnContentWrapper = css`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+  font-family:${fonts.secondary};
 `;
 
 export const iconWrapper = css`

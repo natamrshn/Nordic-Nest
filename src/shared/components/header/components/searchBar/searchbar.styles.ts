@@ -10,14 +10,14 @@ export const input = css`
 	width: 100%;
 	height: 24px;
 	padding-left: 32px;
-  border: none;
-  border-bottom: 1px solid ${colors.nude};
+	border: none;
+	border-bottom: 1px solid ${colors.white};
 	outline: none;
 	font-size: 16px;
-  background: transparent;
+	background: transparent;
 
 	&::placeholder {
-		color: #aaa;
+		color: ${colors.nude};
 	}
 `;
 
