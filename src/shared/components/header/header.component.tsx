@@ -15,18 +15,17 @@ const LOGOS = {
 };
 
 const Header: React.FC = React.memo(() => {
-	useScroll();
+	const isScrolled = useScroll(); // Получаем флаг прокрутки
 	const isLight = useThemeStore((state) => state.isLight);
 
 	return (
-		<div className={box(isLight)}>
+		<div className={box(isLight, isScrolled)}>
 			<div className={section}>
 				<Link to={'/'}>{isLight ? LOGOS.light : LOGOS.dark}</Link>
 				<div className="search">
 					<SearchBar />
 				</div>
 			</div>
-
 			<div className={section}>
 				<Navigation />
 				<UserActions />
@@ -34,5 +33,6 @@ const Header: React.FC = React.memo(() => {
 		</div>
 	);
 });
+
 
 export default Header;
