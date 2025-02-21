@@ -4,16 +4,14 @@ import Slide1 from '~/assets/slider-1.png';
 import Slide2 from '~/assets/slider-2.png';
 import Text from './components/text.component';
 
-
-
 import { sliderContainer, slideStyle } from './slider.styles';
 
 const slides = [Slide1, Slide2, Slide1];
 
 const SliderComponent: React.FC = () => {
 	const settings = {
-    dots: true,
-    // autoplay: true,
+		dots: true,
+		autoplay: true,
 		infinite: true,
 		speed: 500,
 		slidesToShow: 1,
@@ -21,7 +19,7 @@ const SliderComponent: React.FC = () => {
 		arrows: false,
 	};
 
-  return (
+	return (
 		<>
 			<Text />
 			<div className={sliderContainer}>
@@ -34,7 +32,7 @@ const SliderComponent: React.FC = () => {
 				</Slider>
 			</div>
 		</>
-  );
+	);
 };
 
 export default SliderComponent;
