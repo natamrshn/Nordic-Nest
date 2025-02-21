@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 import { fonts } from '~shared/styles';
 
 export const box = css`
-	margin-top: 834px;
+	margin-top: 144px;
 	position: relative;
 
 	h2 {
@@ -17,17 +17,24 @@ export const box = css`
 export const content = css`
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 	padding: 0 20px;
-	margin-top: 10px;
+	gap: 40px;
 
 	img {
 		width: 660px;
 		height: 990px;
-		margin-top: -144px;
 		z-index: -10;
+		margin-top: -150px;
 	}
-	p {
+	div {
 		margin-top: 214px;
+		width: 660px;
+		font-size: 24px;
+		font-family: ${fonts.secondary};
+		font-weight: 400;
+		font-style: italic;
+	}
+	span {
+		font-weight: 600;
 	}
 `;
