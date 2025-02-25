@@ -4,6 +4,7 @@ import { colors, fonts } from '~shared/styles';
 export const box = css`
 	position: fixed;
 	width: 100%;
+  z-index: 1000;
 	display: flex;
 	justify-content: center;
 	align-items: center;
