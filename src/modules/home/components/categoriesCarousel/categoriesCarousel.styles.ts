@@ -52,8 +52,6 @@ export const slickArrow = css`
 		width: 100%;
 		height: auto;
 	}
-
-
 `;
 
 export const nextArrowStyle = css`
@@ -71,6 +69,17 @@ export const headerContainer = css`
 	position: relative;
 	text-align: center;
 	margin-bottom: 16px;
+
+	button {
+		border: none;
+		width: 56px;
+		height: 45px;
+
+		img {
+			width: 24px;
+			height: 24px;
+		}
+	}
 `;
 
 export const arrowsContainer = css`
