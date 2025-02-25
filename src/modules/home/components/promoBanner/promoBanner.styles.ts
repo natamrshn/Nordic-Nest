@@ -2,12 +2,8 @@ import { css } from '@emotion/css';
 import { colors, fonts } from '~shared/styles';
 
 export const box = css`
-position: absolute;
-top: 0;
-left: 0;
-right: 0;
-
-z-index: 1000;
+	position: fixed;
+	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -23,7 +19,7 @@ z-index: 1000;
 
 	p {
 		font-size: 12px;
-    font-weight: 400;
-    font-family: ${fonts.primary};
+		font-weight: 400;
+		font-family: ${fonts.primary};
 	}
 `;

@@ -1,9 +1,9 @@
 import { css } from '@emotion/css';
 import { colors } from '~shared/styles';
 
-export const box = (isLight: boolean, isScrolled: boolean) => css`
+export const box = (isLight: boolean,) => css`
 	position: fixed;
-	top: ${isScrolled ? '0px' : '34px'};
+	top: 34px;
 	left: 0;
 	right: 0;
 	z-index: 1000;

@@ -19,7 +19,7 @@ const Header: React.FC = React.memo(() => {
 	const isLight = useThemeStore((state) => state.isLight);
 
 	return (
-		<div className={box(isLight, isScrolled)}>
+		<div className={box(isLight)}>
 			<div className={section}>
 				<Link to={'/'}>{isLight ? LOGOS.light : LOGOS.dark}</Link>
 				<div className="search">
