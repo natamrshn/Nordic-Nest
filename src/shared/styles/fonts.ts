@@ -1,3 +1,4 @@
+import { text } from "~modules/home/components/slider/components/text.styles";
 import { colors } from "./colors";
 
 /* eslint-disable quotes */
@@ -12,4 +13,5 @@ export const h2 = Object.freeze({
   lineHeight: '64px',
   fontFamily: fonts.primary,
   color: colors.text2,
+  textAlign: 'center',
 });
