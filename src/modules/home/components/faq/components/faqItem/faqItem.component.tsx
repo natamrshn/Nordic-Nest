@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import arrowUp from '~/assets/arrow-up-icon.svg';
-import arrowDown from '~/assets/arrow-down.svg';
+import arrowUp from '~/assets/arrow-up.svg?url';
+import arrowDown from '~/assets/arrow-down.svg?url';
+
 import { answerStyle, faqItemStyle, iconStyle, questionStyle } from './faqItem.styles';
 
 interface FAQItemProps {
