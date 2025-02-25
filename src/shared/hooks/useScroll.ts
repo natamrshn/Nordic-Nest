@@ -8,7 +8,7 @@ export const useScroll = () => {
 
 	useEffect(() => {
 		const handleScroll = () => {
-			const scrolled = window.scrollY > 50;
+			const scrolled = window.scrollY > 34;
 			setIsScrolled(scrolled);
 			toggleTheme(scrolled);
 		};

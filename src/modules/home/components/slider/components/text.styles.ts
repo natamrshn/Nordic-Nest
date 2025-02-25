@@ -3,8 +3,8 @@ import { colors } from '~shared/styles';
 
 export const box = css`
 	position: absolute;
-	top: 209px;
-	z-index: 100;
+	top: 30%;
+	z-index: 1000;
 	display: flex;
 	align-items: center;
 	justify-content: center;

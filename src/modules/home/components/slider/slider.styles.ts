@@ -3,22 +3,21 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 export const sliderContainer = css`
-	position: absolute;
+	position: relative;
+	display: flex;
+	justify-content: center;
 	width: 100vw;
 	height: 100vh;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
-	z-index: -1;
+
+	z-index: 10;
 
 	.slick-slider {
-		width: 100vw;
+		width: 100%;
 		height: 100vh;
 	}
 
 	.slick-list {
-		width: 100vw;
+		width: 100%;
 		height: 100vh;
 	}
 
@@ -26,13 +25,14 @@ export const sliderContainer = css`
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 100vw;
+		width: 100%;
 		height: 100vh;
 
 		img {
 			width: 100vw;
 			height: 100vh;
 			object-fit: cover;
+			object-position: center;
 		}
 	}
 	.slick-dots {
@@ -46,7 +46,7 @@ export const sliderContainer = css`
 	}
 
 	.slick-dots li {
-		width: 40px; 
+		width: 40px;
 		height: 4px;
 	}
 
@@ -71,12 +71,3 @@ export const sliderContainer = css`
 	}
 `;
 
-export const slideStyle = css`
-	width: 100%;
-	height: 100%;
-	img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-`;
