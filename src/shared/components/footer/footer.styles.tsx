@@ -5,11 +5,10 @@ export const box = css`
 	width: 100%;
 	color: rgba(247, 246, 244, 1);
 	padding: 40px;
-	background: ${colors.gray};
+	background: ${colors.footer};
 	font-family: Open Sans;
 	font-weight: 400;
 	font-size: 18px;
-	line-height: 27px;
 	letter-spacing: 0%;
 
 `;
@@ -25,7 +24,6 @@ export const container = css`
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	padding: 0px 0px 30px 0px;
 `;
 
 export const span = css`
@@ -46,8 +44,14 @@ export const titel = css`
 
 export const section = css`
 	width: 30%;
-	padding: 0px 0px 30px 0px;
-`;
+`
+
+export const section_1 = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; 
+`; 
+
 export const contact= css`
   white-space: nowrap;
 	display: flex;
