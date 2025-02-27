@@ -50,6 +50,14 @@ export const section = css`
 `;
 export const contact= css`
   white-space: nowrap;
+	display: flex;
+  gap: 5px;
+  align-items: center;
+`;
+
+export const a = css`
+	text-decoration: none;
+	color: inherit;
 `;
 
 

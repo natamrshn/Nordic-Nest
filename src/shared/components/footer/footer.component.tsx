@@ -4,7 +4,7 @@ import FacebookIcon from '../../../assets/facebook.png';
 import InstagramIcon from '../../../assets/instagram.png';
 import TwitterIcon from '../../../assets/twitter.png';
 
-import { box, contact, container, description, icon, section, span, titel } from './footer.styles';
+import { a, box, contact, container, description, icon, section, span, titel } from './footer.styles';
 
 const Footer: React.FC = () => {
   return (
@@ -25,8 +25,8 @@ const Footer: React.FC = () => {
           <span>Customer Service: Closed. Opens at 9:00 AM ET. Weekly Hours</span>         
         </div>
         <div className={section}>
-          <div className={contact}>Call us:<a href="tel:+34685090606">+34 685 09 06 06</a></div>
-          <div className={contact}>Write us: <a href="mailto:nordic_nest@gmail.com">nordic_nest@gmail.com</a></div>
+          <div className={contact}>Call us:<a className={a}  href="tel:+34685090606">+34 685 09 06 06</a></div>
+          <div className={contact}>Write us: <a className={a} href="mailto:nordic_nest@gmail.com">nordic_nest@gmail.com</a></div>
           
           <div style={{ display: 'flex', gap: '10px' }}>
             <h3 className={description}>Follow us:</h3>
