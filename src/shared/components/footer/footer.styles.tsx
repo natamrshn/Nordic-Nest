@@ -2,9 +2,28 @@ import { css } from '@emotion/css';
 import { colors } from '~shared/styles';
 
 export const box = css`
+	width: 100%;
+	color: rgba(247, 246, 244, 1);
+	padding: 40px;
+	background: ${colors.gray};
+	font-family: Open Sans;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 27px;
+	letter-spacing: 0%;
+
+`;
+
+export const icon = css`
+	width: 20px;
+	height: 20px;
+	object-fit: cover;
+`;
+
+
+export const container = css`
 	display: flex;
-	justify-content: center;
-	align-items: flex-end;
+	justify-content: space-between;
 	width: 100%;
 	padding: 0px 0px 30px 0px;
 `;
@@ -13,3 +32,34 @@ export const span = css`
 	color: ${colors.black};
 	font-weight: 500;
 `;
+export const titel = css`
+	color: ${colors.white};
+	padding: 10px 0;
+  font-family: League Spartan;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: -10%;
+
+`;
+
+
+export const section = css`
+	width: 30%;
+	padding: 0px 0px 30px 0px;
+`;
+export const contact= css`
+  white-space: nowrap;
+`;
+
+
+export const description = css`
+	color: ${colors.white};
+	font-family: Open Sans;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  letter-spacing: 0%;
+
+`;
+
