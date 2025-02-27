@@ -12,4 +12,5 @@ export const colors = Object.freeze({
 	light_blue: '#5397F5',
 	light_gray: '#A9A9A9',
 	gray: '#898989',
+	footer:'#4b4443'
 });
