@@ -14,6 +14,6 @@ export const navigationItem = (isLight: boolean) => css`
 	font-weight: 400;
 
 	a {
-		color: ${isLight ? colors.black : colors.light_gray};
+		color: ${isLight ? colors.black : colors.white};
 	}
 `;
