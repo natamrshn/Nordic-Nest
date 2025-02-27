@@ -55,7 +55,7 @@ export const modal = css`
 	position: fixed;
 	top: 0;
 	right: -100%; /* Начальное положение за пределами экрана */
-	width: 300px;
+	width: 50vw;
 	height: 100vh;
 	background: white;
 	padding: 20px;

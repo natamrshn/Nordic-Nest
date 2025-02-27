@@ -13,6 +13,8 @@ import {
 import getTheLook from '~assets/get-the-look.png';
 import shopIcon from '~assets/icon-shop.svg?url';
 import closeIcon from '~assets/icon-shop.svg?url';
+import ProductCard from '~shared/components/productCard/productCard.component';
+import img from '~/assets/faq-image.png';
 
 const GetTheLook = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +49,13 @@ const GetTheLook = () => {
 						</button>
 						<h2>Selected Look</h2>
 						<p>Here you can add selected furniture items...</p>
+						<ProductCard
+							image={img}
+							title="Bed Vintage"
+							price={400}
+							category="Living Room"
+							isNew
+						/>
 					</div>
 				</>
 			)}
