@@ -1,9 +1,15 @@
 import { css } from '@emotion/css';
+import { fonts } from '~shared/styles';
 
 export const cardStyle = css`
 	max-width: 330px;
 	overflow: hidden;
 	background: white;
+  position: relative;
+
+	&:hover .overlay {
+		opacity: 1;
+	}
 `;
 
 export const imageContainer = css`
@@ -70,4 +76,28 @@ export const priceStyle = css`
 export const categoryStyle = css`
 	font-size: 14px;
 	color: #777;
+`;
+
+export const overlay = css`
+	position: absolute;
+	bottom: 0px;
+	width: 330px;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
+
+	&:hover {
+		opacity: 1;
+    cursor: pointer;
+	}
+`;
+
+export const addToCartButton = css`
+	width: 100%;
+	padding: 14px 0;
+	background: #31251f;
+	color: white;
+	font-size: 18px;
+	text-align: center;
+  font-weight: 400;
+  font-family: ${fonts.secondary};
 `;

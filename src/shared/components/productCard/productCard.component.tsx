@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import heartIcon from '~assets/icon-heart-dark.svg?url';
 import {
+	addToCartButton,
 	cardStyle,
 	categoryStyle,
 	favoriteButton,
@@ -9,6 +10,7 @@ import {
 	imageStyle,
 	infoStyle,
 	newLabel,
+	overlay,
 	priceStyle,
 	titleStyle,
 } from './productCard.styles';
@@ -39,11 +41,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
 					className={favoriteButton}
 					onClick={() => setIsFavorite(!isFavorite)}
 				>
-					<img
-						src={ heartIcon}
-						alt="Favorite"
-					/>
+					<img src={heartIcon} alt="Favorite" />
 				</button>
+				<div className={overlay}>
+					<div className={addToCartButton}>ADD TO CART</div>
+				</div>
 			</div>
 			<div className={infoStyle}>
 				<div className={headerStyle}>

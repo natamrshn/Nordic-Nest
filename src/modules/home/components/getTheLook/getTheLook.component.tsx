@@ -11,13 +11,13 @@ import {
 	closeButton,
 } from './getTheLook.styles';
 import getTheLook from '~assets/get-the-look.png';
-import shopIcon from '~assets/icon-shop.svg?url';
-import closeIcon from '~assets/icon-shop.svg?url';
+import closeIcon from '~assets/icon-close.svg?url';
 import ProductCard from '~shared/components/productCard/productCard.component';
 import img from '~/assets/faq-image.png';
+import Button from '~shared/components/button/button.component';
 
 const GetTheLook = () => {
-  const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 
 	return (
 		<>
@@ -27,8 +27,7 @@ const GetTheLook = () => {
 				<div className={content}>
 					<img src={getTheLook} alt="getTheLook" className={image} />
 					<button className={button} onClick={() => setIsOpen(true)}>
-						<img src={shopIcon} alt="" />
-						<p>Get the look</p>
+						<Button text="Get the look" type="button" />
 					</button>
 				</div>
 			</div>
@@ -41,21 +40,51 @@ const GetTheLook = () => {
 						onClick={() => setIsOpen(false)}
 					/>
 					<div className={`${modal} ${isOpen ? modalOpen : ''}`}>
-						<button
-							className={closeButton}
-							onClick={() => setIsOpen(false)}
+						<div
+							style={{
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
 						>
-							<img src={closeIcon} alt="Close" />
-						</button>
-						<h2>Selected Look</h2>
-						<p>Here you can add selected furniture items...</p>
-						<ProductCard
-							image={img}
-							title="Bed Vintage"
-							price={400}
-							category="Living Room"
-							isNew
-						/>
+							<button
+								className={closeButton}
+								onClick={() => setIsOpen(false)}
+							>
+								<img
+									src={closeIcon}
+									alt="Close"
+									className={closeButton}
+								/>
+							</button>
+							<h2
+								style={{
+									...h2,
+									flexGrow: 1,
+									textAlign: 'center',
+									margin: 0,
+								}}
+							>
+								GET THE LOOK
+							</h2>
+						</div>
+
+						<div className="contentGrid">
+							<ProductCard
+								image={img}
+								title="Bed Vintage"
+								price={400}
+								category="Living Room"
+								isNew
+							/>
+							<ProductCard
+								image={img}
+								title="Bed Vintage"
+								price={400}
+								category="Living Room"
+								isNew
+							/>
+						</div>
 					</div>
 				</>
 			)}
