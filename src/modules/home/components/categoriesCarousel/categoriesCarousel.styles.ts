@@ -10,6 +10,7 @@ export const sliderContainer = css`
 
 	.slick-slider {
 		width: 100%;
+    max-width: 1440px;
 		height: 374px;
 	}
 
@@ -39,8 +40,7 @@ export const slickArrow = css`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: #f5f5f5;
-	border-radius: 8px;
+	background: #edebeb;
 	cursor: pointer;
 	transition: background 0.3s;
 
@@ -65,7 +65,10 @@ export const prevArrowStyle = css`
 `;
 
 export const headerContainer = css`
+	margin-top: 100px;
+
 	width: 100%;
+	max-width: 1440px;
 	position: relative;
 	text-align: center;
 	margin-bottom: 16px;
