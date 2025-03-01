@@ -15,27 +15,13 @@ export const content = css`
 
 export const button = css`
 	position: absolute;
-	left: 28px;
-	bottom: 46px;
-
-	padding: 8px 12px;
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 12px;
-
-	font-size: 24px;
-	font-weight: 400;
-	font-family: ${fonts.secondary};
-	background-color: #eeeeee;
-	border: none;
-	cursor: pointer;
-
-	img {
-		width: 24px;
-		height: 24px;
-	}
+	left: 50%;
+	bottom: 50%;
+	transform: translate(-50%, 50%);
+  background-color: transparent;
+	backdrop-filter: blur(10px);
+  border: none;
+  cursor: pointer;
 `;
 
 export const image = css`
@@ -55,7 +41,7 @@ export const modal = css`
 	position: fixed;
 	top: 0;
 	right: -100%; /* Начальное положение за пределами экрана */
-	width: 300px;
+	width: 50vw;
 	height: 100vh;
 	background: white;
 	padding: 20px;
@@ -72,7 +58,7 @@ export const closeButton = css`
 	background: none;
 	border: none;
 	cursor: pointer;
-	position: absolute;
-	top: 10px;
-	right: 10px;
+	top: 44.5px;
+	right: 24px;
 `;
+
