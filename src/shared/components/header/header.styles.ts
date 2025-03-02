@@ -1,16 +1,17 @@
 import { css } from '@emotion/css';
-import { colors} from '~shared/styles';
+import { colors } from '~shared/styles';
 
-export const box = (isLight: boolean) => css`
+export const box = (isLight: boolean,) => css`
 	position: fixed;
-	top: 0;
+	top: 34px;
 	left: 0;
 	right: 0;
+	z-index: 1000;
 	padding: 30px 40px;
 	display: flex;
 	justify-content: space-between;
 	flex-direction: row;
-	background: ${isLight ? colors.white : colors.black};
+	background: ${isLight ? colors.white : `transparent`};
 	color: ${isLight ? colors.black : colors.white};
 	transition:
 		background 0.3s ease-in-out,

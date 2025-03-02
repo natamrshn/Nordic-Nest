@@ -15,7 +15,7 @@ const LOGOS = {
 };
 
 const Header: React.FC = React.memo(() => {
-	useScroll();
+	const isScrolled = useScroll(); // Получаем флаг прокрутки
 	const isLight = useThemeStore((state) => state.isLight);
 
 	return (
@@ -26,7 +26,6 @@ const Header: React.FC = React.memo(() => {
 					<SearchBar />
 				</div>
 			</div>
-
 			<div className={section}>
 				<Navigation />
 				<UserActions />
@@ -34,5 +33,6 @@ const Header: React.FC = React.memo(() => {
 		</div>
 	);
 });
+
 
 export default Header;
