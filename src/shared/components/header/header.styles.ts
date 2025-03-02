@@ -3,7 +3,7 @@ import { colors } from '~shared/styles';
 
 export const box = (isLight: boolean,) => css`
 	position: fixed;
-	top: 34px;
+	top: 33px;
 	left: 0;
 	right: 0;
 	z-index: 1000;
