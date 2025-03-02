@@ -31,7 +31,10 @@ const App = (): React.ReactNode => {
                   style={{ cursor: 'pointer', position: 'absolute', top: '30px', fontSize: '24px' }}
                 > x
                 </div>
-                <div style={{ display: 'flex', gap: '120px',  width: '100%'}} >
+                <div style={{
+                  display: 'flex', 
+                  width: '100%', justifyContent: 'space-around',}}
+                >
                   <Space />
                   <Furniture />
                   <ModalImg />

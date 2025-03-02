@@ -9,7 +9,7 @@ import NewIn from '../../../assets/new in.png';
 
 const ModalImg: React.FC = () => {
   return (
-    <div style={{ display: 'flex', gap: '10px' }}>   
+    <div style={{ display: 'flex', gap: '40px' }}>   
       <img className={icon} src={Bestsellers} alt="bestsellers" /> 
       <img className={icon} src={NewIn} alt="New in" />  
     </div>       

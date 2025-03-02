@@ -14,10 +14,7 @@ export const modalOverlay = css`
 export const modalContent = css`
     display: flex;
     width: 100%;
-
-    justify-content: space-between;
-    align-items: center;
     background: rgba(247, 246, 244, 1);
-    padding: 50px;
+    padding: 50px 0;
     border-radius: 5px;
 `;
