@@ -21,7 +21,7 @@ export const navigationItem = (isLight: boolean) => css`
 `;
 
 export const button = (isLight: boolean) => css`  
-  padding: 12px;
+  padding: 0 12px;
   background: transparent;
   border: none;
   color: ${isLight ? colors.black : colors.white };

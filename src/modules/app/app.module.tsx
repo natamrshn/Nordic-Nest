@@ -11,37 +11,44 @@ import ModalImg from '~shared/components/modalImg/modalImg';
 
 const App = (): React.ReactNode => {
 	const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const modalRef = React.useRef(null);
 
-    const handleShopClick = () => {
-        setIsModalOpen(true); 
-    };
+  const handleOutsideClick = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setIsModalOpen(false);
+    }
+  };
 
+React.useEffect(() => {
+  document.addEventListener("mousedown", handleOutsideClick);
+  return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+  };
+}, []);
+
+  const handleShopClick = () => {
+    setIsModalOpen(prevState => !prevState);
+  };
     return (
-        <>
-            <PromoBanner />
-            <Header onShopClick={handleShopClick}/>
-            <Navigation onShopClick={handleShopClick} /> 
-            <MainRouter />
-            <Footer />
+      <>
+        <PromoBanner />
+        <Header onShopClick={handleShopClick}/>
+        <Navigation  isModalOpen={isModalOpen} onShopClick={handleShopClick} /> 
+        <MainRouter />
+        <Footer />
 
-  
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-              <>
-                <div onClick={() => setIsModalOpen(false)} 
-                  style={{ cursor: 'pointer', position: 'absolute', top: '30px', fontSize: '24px' }}
-                > x
-                </div>
-                <div style={{
-                  display: 'flex', 
-                  width: '100%', justifyContent: 'space-around',}}
-                >
-                  <Space />
-                  <Furniture />
-                  <ModalImg />
-                </div>
-              </>
-            </Modal>
-        </>
+
+        <Modal   isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <div  ref={modalRef} style={{
+            display: 'flex', 
+            width: '100%', justifyContent: 'space-around',}}
+          >
+            <Space />
+            <Furniture />
+            <ModalImg />
+          </div>
+          </Modal>
+      </>
     );
 };
 
