@@ -9,6 +9,7 @@ import {
 	modalOpen,
 	modalOverlay,
 	closeButton,
+  contentGrid,
 } from './getTheLook.styles';
 import getTheLook from '~assets/get-the-look.png';
 import closeIcon from '~assets/icon-close.svg?url';
@@ -69,7 +70,21 @@ const GetTheLook = () => {
 							</h2>
 						</div>
 
-						<div className="contentGrid">
+						<div className={contentGrid}>
+							<ProductCard
+								image={img}
+								title="Bed Vintage"
+								price={400}
+								category="Living Room"
+								isNew
+							/>
+							<ProductCard
+								image={img}
+								title="Bed Vintage"
+								price={400}
+								category="Living Room"
+								isNew
+							/>
 							<ProductCard
 								image={img}
 								title="Bed Vintage"
