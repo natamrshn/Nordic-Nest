@@ -5,7 +5,7 @@ export const cardStyle = css`
 	max-width: 330px;
 	overflow: hidden;
 	background: white;
-  position: relative;
+	position: relative;
 
 	&:hover .overlay {
 		opacity: 1;
@@ -53,7 +53,9 @@ export const favoriteButton = css`
 `;
 
 export const infoStyle = css`
-	padding: 12px;
+	margin-top: 10px;
+	font-family: ${fonts.secondary};
+	color: #313136;
 `;
 
 export const headerStyle = css`
@@ -64,18 +66,18 @@ export const headerStyle = css`
 
 export const titleStyle = css`
 	font-size: 18px;
-	font-weight: bold;
+	font-weight: 400;
 `;
 
 export const priceStyle = css`
 	font-size: 18px;
-	font-weight: bold;
-	color: #333;
+	font-weight: 400;
 `;
 
 export const categoryStyle = css`
 	font-size: 14px;
-	color: #777;
+	font-weight: 400;
+  margin-top: 6px;
 `;
 
 export const overlay = css`
@@ -87,7 +89,7 @@ export const overlay = css`
 
 	&:hover {
 		opacity: 1;
-    cursor: pointer;
+		cursor: pointer;
 	}
 `;
 
@@ -98,6 +100,6 @@ export const addToCartButton = css`
 	color: white;
 	font-size: 18px;
 	text-align: center;
-  font-weight: 400;
-  font-family: ${fonts.secondary};
+	font-weight: 400;
+	font-family: ${fonts.secondary};
 `;
