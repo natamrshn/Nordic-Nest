@@ -14,6 +14,15 @@ export const navigationItem = (isLight: boolean) => css`
 	font-weight: 400;
 
 	a {
-		color: ${isLight ? colors.black : colors.white};
+		color: ${isLight ? colors.black : colors.white };
 	}
+
+	
+`;
+
+export const button = (isLight: boolean) => css`  
+  padding: 0 12px;
+  background: transparent;
+  border: none;
+  color: ${isLight ? colors.black : colors.white };
 `;
