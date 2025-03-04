@@ -30,6 +30,9 @@
 			],
 			"~stores/*": [
 				"src/shared/stores/*"
+			],
+			"~about-us/*": [
+				"src/modules/about-us/*"
 			]
 		}
 	}

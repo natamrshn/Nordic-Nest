@@ -35,7 +35,7 @@ const Header: React.FC<HeaderProps> = React.memo(({ onShopClick }) => {
 				<AI />
 			</div>
 			<div className={section}>
-				<Navigation onShopClick={onShopClick} />
+				<Navigation onShopClick={onShopClick} isModalOpen={false} />
 				<UserActions />
 			</div>
 		</div>

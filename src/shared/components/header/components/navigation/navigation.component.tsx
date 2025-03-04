@@ -5,7 +5,7 @@ import React from 'react';
 
 const NAV_LINKS = [
     { path: '/shop', label: 'Shop', isModal: true }, 
-    { path: '/about', label: 'About Us' },
+    { path: '/about-us', label: 'About Us' },
     { path: '/find-us', label: 'Find Us' },
 ];
 
