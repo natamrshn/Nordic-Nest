@@ -22,6 +22,7 @@ export const imageStyle = css`
 	width: 330px;
 	height: 330px;
 	object-fit: cover;
+  object-position: center;
 `;
 
 export const newLabel = css`
