@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import Slider, { CustomArrowProps } from 'react-slick';
+import Slider from 'react-slick';
 import right from '~assets/icon-arrow-right.svg?url';
 import left from '~assets/icon-arrow-left.svg?url';
 
@@ -38,7 +38,7 @@ const products = [
 		isNew: true,
 	},
 	{
-		image: 'image4.jpg',
+		image: img,
 		title: 'Product 4',
 		price: 150,
 		category: 'Office',

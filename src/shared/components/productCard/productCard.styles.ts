@@ -4,7 +4,7 @@ import { fonts } from '~shared/styles';
 export const cardStyle = css`
 	max-width: 330px;
 	overflow: hidden;
-	background: white;
+	background: transparent;
   position: relative;
 
 	&:hover .overlay {
@@ -77,7 +77,6 @@ export const priceStyle = css`
 export const categoryStyle = css`
 	font-size: 14px;
 	color: #777;
-  margin-bottom: 15px;
 `;
 
 export const overlay = css`
