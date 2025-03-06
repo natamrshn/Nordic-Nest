@@ -15,8 +15,12 @@ const LOGOS = {
 	dark: <LogoLight />,
 };
 
-const Header: React.FC = React.memo(() => {
-	const isScrolled = useScroll(); // Получаем флаг прокрутки
+interface HeaderProps {
+	onShopClick: () => void;
+}
+
+const Header: React.FC<HeaderProps> = React.memo(({ onShopClick }) => {
+	const isScrolled = useScroll(); 
 	const isLight = useThemeStore((state) => state.isLight);
 
 	return (
@@ -31,7 +35,7 @@ const Header: React.FC = React.memo(() => {
 				<AI />
 			</div>
 			<div className={section}>
-				<Navigation />
+				<Navigation onShopClick={onShopClick} isModalOpen={false} />
 				<UserActions />
 			</div>
 		</div>
@@ -39,3 +43,4 @@ const Header: React.FC = React.memo(() => {
 });
 
 export default Header;
+
