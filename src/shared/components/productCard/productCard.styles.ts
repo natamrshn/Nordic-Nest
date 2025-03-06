@@ -29,8 +29,8 @@ export const newLabel = css`
 	position: absolute;
 	width: 75px;
 	height: 47px;
-	top: 14px;
-	left: 14px;
+	top: 14px !important;
+	left: 14px !important;
 	background: #f7f6f4;
 	display: flex;
 	justify-content: center;
@@ -40,7 +40,7 @@ export const newLabel = css`
 `;
 
 export const favoriteButton = css`
-	position: absolute;
+	position: absolute !important;
 	top: 14px;
 	right: 14px;
 	background: none;
@@ -48,8 +48,8 @@ export const favoriteButton = css`
 	cursor: pointer;
 
 	img {
-		width: 24px;
-		height: 24px;
+		width: 24px !important;
+		height: 24px !important;
 	}
 `;
 
@@ -77,6 +77,7 @@ export const priceStyle = css`
 export const categoryStyle = css`
 	font-size: 14px;
 	color: #777;
+  margin-bottom: 15px;
 `;
 
 export const overlay = css`

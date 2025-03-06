@@ -16,20 +16,14 @@
 			"~shared/*": [
 				"src/shared/*"
 			],
-			"~store/*": [
-				"src/store/*"
-			],
-			"~typings/*": [
-				"src/typings/*"
-			],
 			"~/*": [
 				"src/*"
 			],
 			"~types/*": [
 				"src/types/*"
 			],
-			"~stores/*": [
-				"src/shared/stores/*"
+			"~about-us/*": [
+				"src/modules/about-us/*"
 			]
 		}
 	}

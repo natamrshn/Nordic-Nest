@@ -1,21 +1,19 @@
 import React, { useRef } from 'react';
 import Slider, { CustomArrowProps } from 'react-slick';
-import Slide1 from '~/assets/slider-1.png';
-import Slide2 from '~/assets/slider-2.png';
 import right from '~assets/icon-arrow-right.svg?url';
 import left from '~assets/icon-arrow-left.svg?url';
 
 import { h2 } from '~shared/styles';
-import {
-	headerContainer,
-	arrowsContainer,
-	slickArrow,
-	prevArrowStyle,
-	nextArrowStyle,
-} from '../categoriesCarousel/categoriesCarousel.styles';
-import { sliderContainer } from '../slider/slider.styles';
 import ProductCard from '~shared/components/productCard/productCard.component';
-import img from '~/assets/card-default.png?url';
+import img from '~/assets/faq-image.png';
+import {
+	arrowsContainer,
+	headerContainer,
+	nextArrowStyle,
+	prevArrowStyle,
+	slickArrow,
+	sliderContainer,
+} from './itemsCarousel.styles';
 
 const products = [
 	{
