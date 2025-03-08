@@ -44,7 +44,7 @@ const ExclusiveCircle: React.FC = () => {
               </button>
             </div>
           </form>
-        </div>
+      </div>
     </section>
   );
 };
