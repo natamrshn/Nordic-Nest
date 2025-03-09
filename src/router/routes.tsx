@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { AboutUsPage } from '~modules/about-us/pages/about-us.page';
+import AboutUsPage from '~modules/abouts- us/page/abouts-us.page';
+
 import { LoginPage } from '~modules/auth/pages';
 import { HomePage } from '~modules/home/pages/home.page';
 import { ROUTER_KEYS } from '~shared/keys';
