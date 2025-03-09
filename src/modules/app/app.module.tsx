@@ -41,10 +41,10 @@ React.useEffect(() => {
         <Modal   isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           <div  ref={modalRef} style={{
             display: 'flex', 
-            width: '100%', justifyContent: 'space-around',}}
+            width: '100%', justifyContent: 'space-between', padding: '70px 80px',}}
           >
             <Space />
-            <Furniture />
+            {/* <Furniture /> */}
             <ModalImg />
           </div>
           </Modal>
