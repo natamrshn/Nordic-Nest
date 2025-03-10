@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
       <div className={titel}>NORDICNEST</div>
       <div className={container}>
         <div className={section}>
-          <Link className={`${description} ${titel}`} to="/">EXPLORE</Link>
+          <Link className={titel} to="/">EXPLORE</Link>
           <Link className={description} to="/shop">Shop</Link>
           <Link className={description} to="/about-us">About Us</Link>
           <Link className={description} to="/login">Login</Link>

@@ -25,15 +25,24 @@ export const icon = css`
 
 export const container_field = css`
   display: flex;
+
+  &:focus {
+		border: 1px solid rgba(8888); 
+	}
 `;
 
 export const field = css`
 	width: 90%;
-  hight: 52px;
-  padding: 10px;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(184, 173, 173, 1)
+	padding: 10px;
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid rgba(184, 173, 173, 1);
+
+	&:focus {
+		outline: none;
+		border-bottom: 1px solid rgba(184, 173, 173, 0.6); 
+	}
+
 `;
 
 export const form = css`
