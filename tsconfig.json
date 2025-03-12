@@ -22,13 +22,14 @@
 			"~types/*": [
 				"src/types/*"
 			],
-
 			"~stores/*": [
 				"src/shared/stores/*"
 			],
-        
 			"~about-us/*": [
 				"src/modules/about-us/*"
+			],
+			"~ai/*": [
+				"src/modules/ai/*"
 			]
 		}
 	}
