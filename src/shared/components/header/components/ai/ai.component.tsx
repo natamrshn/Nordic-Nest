@@ -9,7 +9,7 @@ const AI = () => {
     const isLight = useThemeStore((state) => state.isLight);
   return (
 		<Link to="/ai">
-			<div className={box}>
+			<div className={box(isLight)}>
 				<img src={isLight ? AIIconDark : AIIcon} alt="ai icon" />
 				<p>AI Help</p>
 			</div>
