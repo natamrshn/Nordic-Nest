@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 import { fonts } from '~shared/styles';
 
 export const box = css`
-	min-height: 100vh;
+	min-height: 50vh;
 	margin-top: 120px;
 	padding: 40px;
 
