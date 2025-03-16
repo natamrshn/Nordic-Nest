@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
         <div className={section}>
           <Link className={`${description} ${titel}`} to="/">EXPLORE</Link>
           <Link className={description} to="/shop">Shop</Link>
-          <Link className={description} to="/about">About Us</Link>
+          <Link className={description} to="/about-us">About Us</Link>
           <Link className={description} to="/login">Login</Link>
           <Link className={description} to="/card">Card</Link>
         </div>

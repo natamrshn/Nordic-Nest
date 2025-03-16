@@ -1,9 +1,9 @@
 import { css } from '@emotion/css';
 import { colors } from '~shared/styles';
 
-export const box = (isLight: boolean,) => css`
+export const box = (isLight: boolean) => css`
 	position: fixed;
-	top: 34px;
+	top: 33px;
 	left: 0;
 	right: 0;
 	z-index: 1000;
@@ -22,6 +22,12 @@ export const section = css`
 	display: flex;
 	gap: 32px;
 	align-items: center;
+`;
+
+export const ai = css`
+	display: flex;
+	align-items: center;
+  margin-left: -200px;
 `;
 
 export const buttonLogout = (isLight: boolean) => css`

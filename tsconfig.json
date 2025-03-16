@@ -16,12 +16,6 @@
 			"~shared/*": [
 				"src/shared/*"
 			],
-			"~store/*": [
-				"src/store/*"
-			],
-			"~typings/*": [
-				"src/typings/*"
-			],
 			"~/*": [
 				"src/*"
 			],
@@ -30,6 +24,12 @@
 			],
 			"~stores/*": [
 				"src/shared/stores/*"
+			],
+			"~about-us/*": [
+				"src/modules/about-us/*"
+			],
+			"~ai/*": [
+				"src/modules/ai/*"
 			]
 		}
 	}

@@ -14,7 +14,7 @@ const SearchBar: React.FC = () => {
 			<input
 				type="text"
 				placeholder="What can we help you find?"
-				className={input}
+				className={input(isLight)}
 			/>
 		</div>
 	);

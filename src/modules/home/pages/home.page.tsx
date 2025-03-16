@@ -6,6 +6,8 @@ import Nostalgia from '../components/nostalgia/nostalgia.component';
 import CategorySlider from '../components/categoriesCarousel/categoriesCarousel.component';
 import Faq from '../components/faq/faq.component';
 import GetTheLook from '../components/getTheLook/getTheLook.component';
+import ExclusiveCircle from '../components/exclusiveCircle/exclusiveCircle';
+import ItemsCarousel from '../components/itemsCarousel/itemsCarousel.component';
 
 export const HomePage = (): React.ReactNode => {
 	const navigate = useNavigate();
@@ -16,6 +18,8 @@ export const HomePage = (): React.ReactNode => {
 			<Nostalgia />
 			<CategorySlider />
 			<GetTheLook />
+			<ItemsCarousel />
+			<ExclusiveCircle />
 			<Faq />
 		</div>
 	);
