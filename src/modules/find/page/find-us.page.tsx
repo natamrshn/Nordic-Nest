@@ -1,19 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { boxs } from "./abouts-us.style";
-import AboutContent from '../components/aboutContent/about.content';
+import { boxs } from "./find-us.style";
+import AboutContent from '../components/findContent/find.content';
 import  BreadCrumbs from "../../../shared/components/Bread crumbs/Bread crumbs";
 
-const AboutUsPage: React.FC = () => {
+const FindUsPage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
     <div className={boxs}>
-      <BreadCrumbs title={'About Us'} />
+      <BreadCrumbs title={'Find Us'} />
       <AboutContent />      
-
     </div>
   );
 };
 
-export default AboutUsPage;
+export default FindUsPage;
