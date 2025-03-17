@@ -18,6 +18,12 @@ export const title = css`
   vertical-align: middle;
   text-align: end;
   text-decoration: none;
+
+  color: rgba(49, 49, 54, 1);
+
+  &:visited, &:active, &:hover {
+    color: rgba(49, 49, 54, 1);
+  }
 `;
 
 export const titleHome = css`
@@ -27,8 +33,10 @@ export const titleHome = css`
   font-family: Open Sans;
   font-weight: 400;
   font-size: 14px;
+  text-decoration: none;
 
   color: rgba(135, 141, 152, 1);
+
 `;
 
 export const imageStyle = css`
