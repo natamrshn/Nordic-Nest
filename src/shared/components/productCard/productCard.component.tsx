@@ -41,7 +41,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
 					className={favoriteButton}
 					onClick={() => setIsFavorite(!isFavorite)}
 				>
-					<img src={heartIcon} alt="Favorite" />
+					<img
+						src={heartIcon}
+						alt="Favorite"
+						className={favoriteButton}
+					/>
 				</button>
 				<div className={overlay}>
 					<div className={addToCartButton}>ADD TO CART</div>
