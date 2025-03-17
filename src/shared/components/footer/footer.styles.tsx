@@ -49,7 +49,8 @@ export const section = css`
 export const section_1 = css`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; 
+  justify-content: flex-end;
+  padding: 0 0 32px; 
 `; 
 
 export const contact= css`

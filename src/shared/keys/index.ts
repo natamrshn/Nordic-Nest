@@ -5,6 +5,7 @@ export const enum ROUTER_KEYS {
   AI = '/ai',
 	PROFILE = '/profile',
 	LOGIN = '/login',
+	FIND_US = '/find-us',
 }
 
 export const STORAGE_KEYS = Object.freeze({

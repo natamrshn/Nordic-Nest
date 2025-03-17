@@ -37,7 +37,7 @@ const ExclusiveCircle: React.FC = () => {
                 placeholder="Enter your email below to unlock your discount"
                 type="email"
                 className={field}
-                required
+                required                
               />
               <button type="submit" className={button}>
                 <img className={icon} src={ArrowRight} alt="arrow icon" />

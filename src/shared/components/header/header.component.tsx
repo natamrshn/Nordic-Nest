@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import LogoDark from '~/assets/nordic-nest-dark.svg';
 import LogoLight from '~/assets/nordic-nest.svg';
 import { ai, box, section } from './header.styles';
@@ -20,13 +20,17 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = React.memo(({ onShopClick }) => {
-	const isScrolled = useScroll(); 
+	const location = useLocation();
+	const isHomePage = location.pathname === '/'; // Перевіряємо, чи це головна сторінка
 	const isLight = useThemeStore((state) => state.isLight);
 
+	// На головній сторінці тема змінюється, на інших завжди світла
+	const currentTheme = isHomePage ? isLight : true;
+
 	return (
-		<div className={box(isLight)}>
+		<div className={box(currentTheme)}>
 			<div className={section}>
-				<Link to={'/'}>{isLight ? LOGOS.light : LOGOS.dark}</Link>
+				<Link to={'/'}>{currentTheme ? LOGOS.light : LOGOS.dark}</Link>
 				<div className="search">
 					<SearchBar />
 				</div>
@@ -43,4 +47,3 @@ const Header: React.FC<HeaderProps> = React.memo(({ onShopClick }) => {
 });
 
 export default Header;
-
