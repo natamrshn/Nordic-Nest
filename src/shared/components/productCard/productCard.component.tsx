@@ -15,16 +15,9 @@ import {
 	titleStyle,
 } from './productCard.styles';
 
-interface ProductCardProps {
-	image: string;
-	title: string;
-	price: number;
-	category: string;
-	isNew?: boolean;
-}
 
 const ProductCard: React.FC<ProductCardProps> = ({
-	image,
+	mainImage,
 	title,
 	price,
 	category,
@@ -36,7 +29,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 		<div className={cardStyle}>
 			<div className={imageContainer}>
 				{isNew && <span className={newLabel}>New</span>}
-				<img src={image} alt={title} className={imageStyle} />
+				<img src={mainImage} alt={title} className={imageStyle} />
 				<button
 					className={favoriteButton}
 					onClick={() => setIsFavorite(!isFavorite)}

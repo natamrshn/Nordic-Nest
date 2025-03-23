@@ -72,28 +72,32 @@ const GetTheLook = () => {
 
 						<div className={contentGrid}>
 							<ProductCard
-								image={img}
+							    id={1}
+								mainImage={img}
 								title="Bed Vintage"
 								price={400}
 								category="Living Room"
 								isNew
 							/>
 							<ProductCard
-								image={img}
+							    id={1}
+								mainImage={img}
 								title="Bed Vintage"
 								price={400}
 								category="Living Room"
 								isNew
 							/>
 							<ProductCard
-								image={img}
+							    id={1}
+								mainImage={img}
 								title="Bed Vintage"
 								price={400}
 								category="Living Room"
 								isNew
 							/>
 							<ProductCard
-								image={img}
+							    id={1}
+								mainImage={img}
 								title="Bed Vintage"
 								price={400}
 								category="Living Room"

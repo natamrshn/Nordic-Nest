@@ -19,7 +19,8 @@ export const title = css`
   text-align: end;
   text-decoration: none;
 
-  color: rgba(49, 49, 54, 1);
+  color: rgba(128, 128, 132, 1);
+
 
   &:visited, &:active, &:hover {
     color: rgba(49, 49, 54, 1);

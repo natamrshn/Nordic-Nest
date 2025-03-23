@@ -1,16 +1,7 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
 import { spaceItem, title } from './space.styles';
-
-const SPACE_LINKS = [
-    { path: '/kitchen', label: 'Kitchen' }, 
-    { path: '/living room', label: 'Living Room' },
-    { path: '/bedroom', label: 'Bedroom' },
-    { path: '/childrens room', label: 'Childrens`room' },
-    { path: '/office', label: 'Office' },
-    { path: '/outdoor', label: 'Outdoor' },
-];
-
+import { SPACE_LINKS } from '~shared/constants/spaceLink';
 
 
 const Space: React.FC = () => {
