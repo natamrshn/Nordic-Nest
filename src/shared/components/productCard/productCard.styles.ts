@@ -4,7 +4,7 @@ import { fonts } from '~shared/styles';
 export const cardStyle = css`
 	max-width: 330px;
 	overflow: hidden;
-	background: white;
+	background: transparent;
   position: relative;
 
 	&:hover .overlay {
@@ -22,14 +22,15 @@ export const imageStyle = css`
 	width: 330px;
 	height: 330px;
 	object-fit: cover;
+  object-position: center;
 `;
 
 export const newLabel = css`
 	position: absolute;
 	width: 75px;
 	height: 47px;
-	top: 14px;
-	left: 14px;
+	top: 14px !important;
+	left: 14px !important;
 	background: #f7f6f4;
 	display: flex;
 	justify-content: center;
@@ -39,7 +40,7 @@ export const newLabel = css`
 `;
 
 export const favoriteButton = css`
-	position: absolute;
+	position: absolute !important;
 	top: 14px;
 	right: 14px;
 	background: none;
@@ -47,8 +48,8 @@ export const favoriteButton = css`
 	cursor: pointer;
 
 	img {
-		width: 24px;
-		height: 24px;
+		width: 24px !important;
+		height: 24px !important;
 	}
 `;
 
