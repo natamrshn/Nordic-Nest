@@ -1,5 +1,19 @@
 {
 	"compilerOptions": {
+	  "esModuleInterop": true,
+	  "baseUrl": ".",
+	  "jsx": "react-jsx",
+	  "paths": {
+		"~assets/*": ["src/assets/*"],
+		"~modules/*": ["src/modules/*"],
+		"~router/*": ["src/router/*"],
+		"~shared/*": ["src/shared/*"],
+		"~/*": ["src/*"],
+		"~types/*": ["src/types/*"],
+		"~kitchen/*": ["src/modules/kitchen/*"],
+		"~constants/*": ["src/shared/constants/*"]
+	  }
+
 		"esModuleInterop": true,
 		"baseUrl": ".",
 		"jsx": "react-jsx",
@@ -33,4 +47,5 @@
 			]
 		}
 	}
-}
+  }
+  
