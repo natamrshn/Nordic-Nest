@@ -1,22 +1,6 @@
 {
 	"compilerOptions": {
-	  "esModuleInterop": true,
-	  "baseUrl": ".",
-	  "jsx": "react-jsx",
-	  "paths": {
-		"~assets/*": ["src/assets/*"],
-		"~modules/*": ["src/modules/*"],
-		"~router/*": ["src/router/*"],
-		"~shared/*": ["src/shared/*"],
-		"~/*": ["src/*"],
-		"~types/*": ["src/types/*"],
-		"~kitchen/*": ["src/modules/kitchen/*"],
-		"~constants/*": ["src/shared/constants/*"]
-	  }
-
-		"esModuleInterop": true,
 		"baseUrl": ".",
-		"jsx": "react-jsx",
 		"paths": {
 			"~assets/*": [
 				"src/assets/*"
@@ -30,22 +14,15 @@
 			"~shared/*": [
 				"src/shared/*"
 			],
-			"~/*": [
-				"src/*"
-			],
 			"~types/*": [
 				"src/types/*"
 			],
-			"~stores/*": [
-				"src/shared/stores/*"
-			],
-			"~about-us/*": [
-				"src/modules/about-us/*"
+			"~/*": [
+				"src/*"
 			],
 			"~ai/*": [
 				"src/modules/ai/*"
 			]
 		}
 	}
-  }
-  
+}
