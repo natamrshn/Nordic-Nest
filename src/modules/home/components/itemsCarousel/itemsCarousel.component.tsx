@@ -16,29 +16,32 @@ import {
 } from './itemsCarousel.styles';
 
 const products = [
-	{
-		image: img,
+	{   id:1,
+		mainImage: img,
 		title: 'Product 1',
 		price: 99,
 		category: 'Kitchen',
 		isNew: true,
 	},
 	{
-		image: img,
+		id:2,
+		mainImage: img,
 		title: 'Product 2',
 		price: 120,
 		category: 'Living Room',
 		isNew: false,
 	},
 	{
-		image: img,
+		id:3,
+		mainImage: img,
 		title: 'Product 3',
 		price: 80,
 		category: 'Bedroom',
 		isNew: true,
 	},
 	{
-		image: img,
+		id:4,
+		mainImage: img,
 		title: 'Product 4',
 		price: 150,
 		category: 'Office',
