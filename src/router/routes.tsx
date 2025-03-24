@@ -7,7 +7,8 @@ import { LoginPage } from '~modules/auth/pages';
 import FindUsPage from '~modules/find/page/find-us.page';
 import { HomePage } from '~modules/home/pages/home.page';
 import KitchenPage from '~modules/kitchen/page/kitchen.page';
-import LivingRoomPage from '~modules/livingRoom/components/page/LivingRoom.page';
+import LivingRoomPage from '~modules/livingRoom/page/livingRoom.page';
+
 import { ROUTER_KEYS } from '~shared/keys';
 
 export const publicRoutes = (
