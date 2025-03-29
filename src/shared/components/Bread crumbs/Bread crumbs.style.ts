@@ -9,7 +9,7 @@ export const container  = css`
   padding: 0 0 20px;
 `;
 
-export const title = css` 
+export const titlelink = css` 
   font-family: Open Sans;
   font-weight: 400;
   font-size: 14px;
@@ -18,13 +18,7 @@ export const title = css`
   vertical-align: middle;
   text-align: end;
   text-decoration: none;
-
-  color: rgba(128, 128, 132, 1);
-
-
-  &:visited, &:active, &:hover {
-    color: rgba(49, 49, 54, 1);
-  }
+  color: rgba(49, 49, 54, 1);
 `;
 
 export const titleHome = css`

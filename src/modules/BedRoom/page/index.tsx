@@ -1,0 +1,1 @@
+export * from './bedRoom.page';

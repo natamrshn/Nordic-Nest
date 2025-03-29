@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { container, description, productContainer,  title, linkContainer } from './livingRoom.content.style'; 
-import { searchProducts } from "~shared/services/protucts.service";
-import ProductCard from "~shared/components/productCard/productCard.component";
 import { NavLinkComponent } from "~shared/components/navLink/navLinkComponent";
 import { useProducts } from "~shared/hooks/usePoducts";
-import { button, buttonContainer } from "~modules/kitchen/components/kitchenContent/kitchen.content.style";
+import { ProductList } from "~shared/components/productList/productlist";
 
 
 export const LivingRoomContent: React.FC = () => {
-	const { products, isLoading, isError } = useProducts('categoryIds=10');
-  const [visibleProducts, setVisibleProducts] = useState(8);
+  const { products, loading, hasMore, setPage } = useProducts('2');
 
   return (
     <section className={container}>
@@ -23,28 +20,17 @@ export const LivingRoomContent: React.FC = () => {
             and contemporary aesthetics.
           </p>
         </div>
-
         <NavLinkComponent />
-        
       </div>
 
-      {isLoading && <p>Loading...</p>}
-      {isError && <p>Error loading products.</p>}
-   
-      <div className={productContainer}>
-        
-        {products.slice(0, visibleProducts).map((product, index) => (
-          <ProductCard {...product}/>
-        ))}
-               
-      </div>
-      {visibleProducts < products.length && (
-        <div className={buttonContainer}>
-          <button className={button} onClick={() => setVisibleProducts(visibleProducts + 8)}>
-            See more
-          </button>
-        </div>
-      )}
+      <ProductList 
+        products={products} 
+        loading={loading} 
+        hasMore={hasMore} 
+        setPage={setPage} 
+        category="Living Room" 
+      />
+
     </section>
   );
 };
