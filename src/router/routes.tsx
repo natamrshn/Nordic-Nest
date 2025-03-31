@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import BedRoomContent from '~modules/BedRoom/components/bedRoomContent/bedRoom.content';
+import BedRoomPage from '~modules/BedRoom/page/bedRoom.page';
 import AboutUsPage from '~modules/abouts- us/page/abouts-us.page';
 import AI from '~modules/ai/ai.page';
 
@@ -16,6 +18,7 @@ export const publicRoutes = (
 		<Route path={ROUTER_KEYS.HOME} element={<HomePage />} />
 		<Route path={ROUTER_KEYS.KITCHEN} element={<KitchenPage />} />
 		<Route path={ROUTER_KEYS.LIVING_ROOM} element={<LivingRoomPage />} />
+		<Route path={ROUTER_KEYS.BED_ROOM} element={<BedRoomPage />} />
 		<Route path={ROUTER_KEYS.ABOUT_US} element={<AboutUsPage />} />
 
 		<Route path={ROUTER_KEYS.FIND_US} element={<FindUsPage />} />
