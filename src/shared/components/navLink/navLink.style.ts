@@ -1,23 +1,8 @@
-
 import { css } from '@emotion/css';
-import { colors } from '~shared/styles';
-
-export const container = css`
-	width: 100%;
-  height: max-content;
-`;
-
-export const title = css`
-  padding: 0 0 10px;
-`;
 
 export const linkContainer = css`
   display: flex;
   gap: 20px;
-`;
-export const description = css`
-  width: 50%;
-  padding: 0 20px 0 0;
 `;
 
 export const link = css`
@@ -43,13 +28,9 @@ export const spaceItem = css`
 
 `;
 
+export const spaceItemActive = css`
+  color: rgba(49, 49, 54, 1);
 
-export const productContainer = css`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding: 24px;
 `;
+
 

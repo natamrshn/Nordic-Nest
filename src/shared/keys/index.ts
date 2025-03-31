@@ -7,7 +7,8 @@ export const enum ROUTER_KEYS {
 	LOGIN = '/login',
 	FIND_US = '/find-us',
 	SHOP = '/shop',
-	KITCHEN = '/kitchen'
+	KITCHEN = '/kitchen',
+	LIVING_ROOM ='/living room'
 }
 
 export const STORAGE_KEYS = Object.freeze({
