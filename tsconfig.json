@@ -1,6 +1,10 @@
 {
 	"compilerOptions": {
 		"esModuleInterop": true,
+		"lib": [
+			"ES2015",
+			"DOM"
+		],
 		"baseUrl": ".",
 		"jsx": "react-jsx",
 		"paths": {
@@ -30,6 +34,9 @@
 			],
 			"~ai/*": [
 				"src/modules/ai/*"
+			],
+			"~livingRoom – копія/*": [
+				"src/modules/livingRoom – копія/*"
 			]
 		}
 	}
