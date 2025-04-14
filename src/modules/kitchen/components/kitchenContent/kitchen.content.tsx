@@ -17,19 +17,9 @@ export const KitchenContent: React.FC = () => {
   const { products, loading, hasMore, setPage } = useProducts('1');
   const [filters, setFilters] = useState({ sortOrder: "asc", selectedCategory: "", priceRange: [0, 10000] });
   const [categories, setCategories] = useState<Category[]>([]);
+  const [showFilters, setShowFilters] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    setIsLoading(true);
-    getAllCategories()
-      .then(setCategories)
-      .catch(() => {
-        setIsError(true);
-        setCategories([]);
-      })
-    setIsLoading(false);
-  }, []);
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
@@ -64,7 +54,13 @@ export const KitchenContent: React.FC = () => {
         </div>
         <NavLinkComponent />
       </div>
-      <FilterComponent onFilterChange={handleFilterChange} categories={categories} />
+      <button onClick={() => setShowFilters(!showFilters)}>
+        {showFilters ? "Hide Filters" : "Show Filters"}
+      </button>
+
+      {showFilters && (
+        <FilterComponent onFilterChange={handleFilterChange} />
+      )}
       <ProductList 
         products={sortedProducts} 
         loading={loading} 
