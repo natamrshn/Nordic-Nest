@@ -1,76 +1,99 @@
-import * as React from 'react';
-
-import {
-	box,
-	container,
-	form,
-	inputContainer,
-	loginButton,
-} from './login.styles';
-import Button from '~shared/components/button/button.component';
+import React, { useState } from 'react';
 import { AuthService } from '../services/auth.service';
-import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
-import { LoginData } from '../types';
-import { ROUTER_KEYS } from '~shared/keys';
-import Input from '~shared/components/input/input.component';
-import useAuthStore from '~shared/stores/auth.store';
+import { Link } from 'react-router-dom';
+import * as styles from './login.styles';
+import eyeIcon from '~assets/icon_eye_opened.svg?url';
 
-export const LoginPage = (): React.ReactNode => {
-	const [error, setError] = React.useState('');
-	const [email, setEmail] = React.useState('');
-	const [password, setPassword] = React.useState('');
-	const { setTokens, setAuth } = useAuthStore();
-	const navigate = useNavigate();
+interface LoginModalProps {
+	onClose: () => void;
+}
 
-	// const loginMutation = useMutation({
-	// 	mutationFn: ({ email, password }: LoginData) =>
-	// 		AuthService.login(email, password),
-	// 	onSuccess: (data) => {
-	// 		if (data) {
-	// 			setTokens(data.accessToken, data.refreshToken);
-	// 			setAuth(true);
-	// 			navigate(ROUTER_KEYS.PRODUCTS);
-	// 		}
-	// 	},
-	// 	onError: (error) => {
-	// 		console.error('Login failed:', error);
-	// 		setError('Incorrect email or password');
-	// 	},
-	// });
+const LoginModal = ({ onClose }: LoginModalProps) => {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [error, setError] = useState('');
+	const [success, setSuccess] = useState(false); // Добавляем состояние для успеха
 
-	// const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-	// 	event.preventDefault();
-	// 	try {
-	// 		loginMutation.mutate({ email, password });
-	// 	} catch (error: unknown) {
-	// 		console.log(error);
-	// 	}
-	// };
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		setError('');
+		setSuccess(false);
+
+		try {
+			const { accessToken } = await AuthService.login(email, password);
+			localStorage.setItem('accessToken', accessToken);
+			setSuccess(true); // Устанавливаем успех
+			// Закрываем модалку с задержкой, чтобы показать уведомление
+			setTimeout(() => {
+				onClose();
+			}, 1500);
+		} catch (err) {
+			setError('Invalid email or password');
+			console.error('Login error:', err.response?.data || err.message);
+		}
+	};
 
 	return (
-		<div className={box}>
-			<div className={container}>
-				<form className={form}>
-					<div className={inputContainer}>
-						<label>Email</label>
-						<Input
-							type="text"
+		<div className={styles.overlay} onClick={onClose}>
+			<div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+				<button className={styles.closeButton} onClick={onClose}>
+					×
+				</button>
+
+				<form onSubmit={handleSubmit}>
+					<h2 className={styles.title}>LOG IN</h2>
+					<p className={styles.subtitle}>Welcome back home!</p>
+
+					<div className={styles.formFieldsWrapper}>
+						<label className={styles.label}>Email</label>
+						<input
+							type="email"
+							placeholder="Enter your email"
+							className={styles.input}
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
+							required
 						/>
-						<label>Password</label>
-						<Input
-							type="password"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-							error={error ? error : ''}
-						/>
+
+						<label className={styles.label}>Password</label>
+						<div className={styles.passwordWrapper}>
+							<input
+								type="password"
+								placeholder="Enter your password"
+								className={styles.input}
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+								required
+							/>
+							<img
+								src={eyeIcon}
+								alt="Показать пароль"
+								width="24"
+								height="24"
+								className={styles.eyeIcon}
+							/>
+						</div>
 					</div>
 
-					<Button text="Login" extraButtonStyles={loginButton} />
+					{error && <p className={styles.error}>{error}</p>}
+					{success && (
+						<p className={styles.success}>Login successful!</p> // Уведомление об успехе
+					)}
+
+					<button type="submit" className={styles.loginButton}>
+						Log In
+					</button>
+
+					<p className={styles.footer}>
+						Don’t have an account yet?
+						<Link to={'/registration'} className={styles.link} onClick={onClose}>
+							Create account
+						</Link>
+					</p>
 				</form>
 			</div>
 		</div>
 	);
 };
+
+export default LoginModal;
