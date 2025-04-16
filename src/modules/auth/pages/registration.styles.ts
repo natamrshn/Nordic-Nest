@@ -1,46 +1,77 @@
 import { css } from '@emotion/css';
+import { fonts } from '~shared/styles';
 
 export const form = css`
-	width: 300px;
-	margin: 250px auto;
-	padding: 20px;
-	border: 1px solid #ccc;
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	background-color: #fff;
+	margin: 100px auto;
+	background-color: transparent;
+	position: relative;
+	width: 400px;
+`;
+
+export const formFieldsWrapper = css`
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	margin-top: 80px;
 `;
 
 export const title = css`
-	font-size: 24px;
-	font-weight: bold;
+	font-size: 54px;
+  font-family: ${fonts.primary};
+	font-weight: 700;
 	text-align: center;
 	margin-bottom: 20px;
 `;
 
-export const input = css`
-	width: 100%;
-	padding: 10px;
-	margin: 10px 0;
-	border: 1px solid #ddd;
-	border-radius: 4px;
+export const label = css`
 	font-size: 14px;
+	color: #000000;
+	display: block;
+	font-family: ${fonts.secondary};
+`;
+
+export const input = css`
+	padding: 12px 24px;
+  background-color: transparent;
+	width: 100%;
+	font-size: 18px;
+	border: none;
+	border-bottom: 1px solid #d7d1d1;
+	&::placeholder {
+		color: #d7d1d1;
+		font-size: 18px;
+		font-weight: 400;
+		font-family: ${fonts.secondary};
+	}
 `;
 
 export const button = css`
 	width: 100%;
-	padding: 12px;
+	padding: 14px 89px;
 	border: none;
-	border-radius: 4px;
-	background-color: #4caf50;
 	color: white;
-	font-size: 16px;
+	font-size: 24px;
+	font-weight: 400;
+  font-family: ${fonts.secondary};
+	border: none;
 	cursor: pointer;
-	margin-top: 10px;
-	transition: background-color 0.3s;
+	background-color: #887a7a;
+	margin-top: 40px;
 
 	&:hover {
-		background-color: #45a049;
+		background-color: #1e1814;
 	}
+`;
+
+export const checkboxLabel = css`
+	font-size: 14px;
+  font-family: ${fonts.secondary};
+  font-weight: 400;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 8px;
+  text-align: center;
 `;
 
 export const error = css`

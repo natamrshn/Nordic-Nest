@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AuthService } from '../services/auth.service';
 import * as styles from './registration.styles';
 import { useNavigate } from 'react-router-dom'; // Для перенаправления
+import { a } from '~shared/components/footer/footer.styles';
 
 const RegisterForm = () => {
 	const [email, setEmail] = useState('');
@@ -11,6 +12,8 @@ const RegisterForm = () => {
 	const [secondName, setSecondName] = useState('');
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState(false);
+	const [agreeTerms, setAgreeTerms] = useState(false);
+	const [subscribe, setSubscribe] = useState(false);
 	const navigate = useNavigate(); // Для перенаправления
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -57,56 +60,97 @@ const RegisterForm = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className={styles.form}>
-			<h2 className={styles.title}>Register</h2>
-			<input
-				type="text"
-				placeholder="First Name"
-				value={firstName}
-				onChange={(e) => setFirstName(e.target.value)}
-				className={styles.input}
-				required
-			/>
-			<input
-				type="text"
-				placeholder="Second Name"
-				value={secondName}
-				onChange={(e) => setSecondName(e.target.value)}
-				className={styles.input}
-				required
-			/>
-			<input
-				type="email"
-				placeholder="Email"
-				value={email}
-				onChange={(e) => setEmail(e.target.value)}
-				className={styles.input}
-				required
-			/>
-			<input
-				type="password"
-				placeholder="Password"
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}
-				className={styles.input}
-				required
-			/>
-			<input
-				type="password"
-				placeholder="Repeat Password"
-				value={repeatPassword}
-				onChange={(e) => setRepeatPassword(e.target.value)}
-				className={styles.input}
-				required
-			/>
-			{error && <p className={styles.error}>{error}</p>}
-			{success && (
-				<p className={styles.success}>Registration successful!</p>
-			)}
-			<button type="submit" className={styles.button}>
-				Register
-			</button>
-		</form>
+		<>
+			<h2 className={styles.title}>CREATE AN ACCOUNT</h2>
+			<form onSubmit={handleSubmit} className={styles.form}>
+				<div className={styles.formFieldsWrapper}>
+					<label className={styles.label}>First Name</label>
+					<input
+						type="text"
+						placeholder="First Name"
+						className={styles.input}
+						value={firstName}
+						onChange={(e) => setFirstName(e.target.value)}
+						required
+					/>
+					<label className={styles.label}>Second Name</label>
+					<input
+						type="text"
+						placeholder="Second Name"
+						className={styles.input}
+						value={secondName}
+						onChange={(e) => setSecondName(e.target.value)}
+						required
+					/>
+					<label className={styles.label}>Email</label>
+					<input
+						type="mail"
+						placeholder="Email"
+						className={styles.input}
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						required
+					/>
+					<label className={styles.label}>Password</label>
+					<input
+						type="password"
+						placeholder="Password"
+						className={styles.input}
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						required
+					/>
+					<label className={styles.label}>Repeat Password</label>
+					<input
+						type="password"
+						placeholder="Repeat Password"
+						className={styles.input}
+						value={repeatPassword}
+						onChange={(e) => setRepeatPassword(e.target.value)}
+						required
+					/>
+
+					{/* Чекбоксы */}
+					<label className={styles.checkboxLabel}>
+						<input
+							type="checkbox"
+							checked={agreeTerms}
+							onChange={() => setAgreeTerms(!agreeTerms)}
+							style={{
+								width: '24px',
+								height: '24px',
+								cursor: 'pointer',
+							}}
+						/>
+						I want to receive special offers via email.
+					</label>
+
+					<label className={styles.checkboxLabel}>
+						<input
+							type="checkbox"
+							checked={subscribe}
+							onChange={() => setSubscribe(!subscribe)}
+							style={{
+								width: '24px',
+								height: '24px',
+								cursor: 'pointer',
+              }}
+              required
+						/>
+						I agree with the privacy policy
+					</label>
+				</div>
+
+				{error && <p className={styles.error}>{error}</p>}
+				{success && (
+					<p className={styles.success}>Registration successful!</p>
+				)}
+
+				<button type="submit" className={styles.button}>
+					Create account
+				</button>
+			</form>
+		</>
 	);
 };
 

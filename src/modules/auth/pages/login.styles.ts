@@ -16,7 +16,7 @@ export const modal = css`
 	width: 490px;
 	border-radius: 8px;
 	position: relative;
-	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 `;
 
 export const closeButton = css`
@@ -55,6 +55,7 @@ export const label = css`
 export const input = css`
 	padding: 12px 24px;
 	width: 100%;
+  font-size: 18px;
 	border: none;
 	border-bottom: 1px solid #d7d1d1;
 	&::placeholder {
@@ -66,9 +67,10 @@ export const input = css`
 `;
 
 export const formFieldsWrapper = css`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+  margin-top: 80px;
 `;
 
 export const passwordWrapper = css`
@@ -84,45 +86,53 @@ export const eyeIcon = css`
 	cursor: pointer;
 	width: 24px;
 	height: 24px;
-	// display: flex;
-	// align-items: center;
-	// justify-content: center;
 `;
 
 export const loginButton = css`
 	width: 100%;
-	padding: 12px;
-	background-color: #8b7e7e;
+	padding: 14px 139px;
+	border: none;
 	color: white;
-	font-size: 16px;
+	font-size: 24px;
+	font-weight: 400;
 	border: none;
 	cursor: pointer;
-	margin-top: 10px;
+	background-color: #887a7a;
+	margin-top: 80px;
+
+	&:hover {
+		background-color: #1e1814;
+	}
 `;
 
 export const footer = css`
-	font-size: 12px;
-	color: #555;
-	text-align: center;
-	margin-top: 20px;
+	display: flex;
+	gap: 15px;
+	font-size: 14px;
+	color: #515158;
+	margin-top: 40px;
+	margin-bottom: 20px;
+	font-family: ${fonts.secondary};
 `;
 
 export const link = css`
-	color: #000;
+	color: #31251f;
 	font-weight: 500;
 	text-decoration: underline;
-	margin-left: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: ${fonts.secondary};
 `;
 
 export const error = css`
-  color: #ff4d4d;
-  font-size: 16px;
-  text-align: center;
-  margin-top: 10px;
+	color: #ff4d4d;
+	font-size: 16px;
+	text-align: center;
+	margin-top: 10px;
 `;
 export const success = css`
-  color: #4caf50;
-  font-size: 16px;
-  text-align: center;
-  margin-top: 10px;
+	color: #4caf50;
+	font-size: 16px;
+	text-align: center;
+	margin-top: 10px;
 `;

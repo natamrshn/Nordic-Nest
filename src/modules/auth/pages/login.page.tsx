@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { AuthService } from '../services/auth.service';
 import { Link } from 'react-router-dom';
 import * as styles from './login.styles';
-import eyeIcon from '~assets/icon_eye_opened.svg?url';
+import eyeIcon from '~assets/icon-eye-opened.svg?url';
+import closeEyeIcon from '~assets/icon-eye-closed.svg?url';
+import closeIcon from '~assets/icon-close.svg?url';
 
 interface LoginModalProps {
 	onClose: () => void;
@@ -12,7 +14,8 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
-	const [success, setSuccess] = useState(false); // Добавляем состояние для успеха
+  const [success, setSuccess] = useState(false); // Добавляем состояние для успеха
+  const [showPassword, setShowPassword] = useState(false);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -37,7 +40,7 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
 		<div className={styles.overlay} onClick={onClose}>
 			<div className={styles.modal} onClick={(e) => e.stopPropagation()}>
 				<button className={styles.closeButton} onClick={onClose}>
-					×
+					<img src={closeIcon} alt="closeIcon" />
 				</button>
 
 				<form onSubmit={handleSubmit}>
@@ -58,7 +61,7 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
 						<label className={styles.label}>Password</label>
 						<div className={styles.passwordWrapper}>
 							<input
-								type="password"
+								type={showPassword ? 'text' : 'password'}
 								placeholder="Enter your password"
 								className={styles.input}
 								value={password}
@@ -66,11 +69,16 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
 								required
 							/>
 							<img
-								src={eyeIcon}
-								alt="Показать пароль"
+								src={showPassword ? eyeIcon : closeEyeIcon}
+								alt={
+									showPassword
+										? 'Скрыть пароль'
+										: 'Показать пароль'
+								}
 								width="24"
 								height="24"
 								className={styles.eyeIcon}
+								onClick={() => setShowPassword(!showPassword)}
 							/>
 						</div>
 					</div>
@@ -86,7 +94,11 @@ const LoginModal = ({ onClose }: LoginModalProps) => {
 
 					<p className={styles.footer}>
 						Don’t have an account yet?
-						<Link to={'/registration'} className={styles.link} onClick={onClose}>
+						<Link
+							to={'/registration'}
+							className={styles.link}
+							onClick={onClose}
+						>
 							Create account
 						</Link>
 					</p>
