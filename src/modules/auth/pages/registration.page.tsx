@@ -1,144 +1,164 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthService } from '../services/auth.service';
 import * as styles from './registration.styles';
-import { useNavigate } from 'react-router-dom'; // Для перенаправления
-import { a } from '~shared/components/footer/footer.styles';
 
 const RegisterForm = () => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [repeatPassword, setRepeatPassword] = useState('');
-	const [firstName, setFirstName] = useState('');
-	const [secondName, setSecondName] = useState('');
-	const [error, setError] = useState('');
-	const [success, setSuccess] = useState(false);
+	const [formData, setFormData] = useState({
+		email: '',
+		password: '',
+		repeatPassword: '',
+		firstName: '',
+		secondName: '',
+	});
 	const [agreeTerms, setAgreeTerms] = useState(false);
 	const [subscribe, setSubscribe] = useState(false);
-	const navigate = useNavigate(); // Для перенаправления
+	const [error, setError] = useState('');
+	const [success, setSuccess] = useState(false);
+
+	const navigate = useNavigate();
+
+	const handleChange =
+		(field: keyof typeof formData) =>
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			setFormData({ ...formData, [field]: e.target.value });
+		};
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setError('');
 		setSuccess(false);
 
+		const { email, password, repeatPassword, firstName, secondName } =
+			formData;
+
 		// Валидация
 		if (!email.includes('@') || !email.includes('.')) {
-			setError('Invalid email');
-			return;
+			return setError('Invalid email');
 		}
 		if (password.length < 8) {
-			setError('Password must be at least 8 characters');
-			return;
+			return setError('Password must be at least 8 characters');
 		}
 		if (password !== repeatPassword) {
-			setError('Passwords do not match');
-			return;
+			return setError('Passwords do not match');
 		}
 		if (!firstName.trim() || !secondName.trim()) {
-			setError('First name and second name are required');
-			return;
+			return setError('First name and second name are required');
+		}
+		if (!subscribe) {
+			return setError('You must agree with the privacy policy');
 		}
 
 		try {
-			const data = {
-				email,
-				password,
-				repeatPassword,
-				firstName,
-				secondName,
-			};
-			console.log('Sending data:', data);
-			await AuthService.register(data);
+			await AuthService.register(formData);
 			setSuccess(true);
-			// Перенаправляем на главную страницу или другую
-			setTimeout(() => navigate('/'), 1000); // Задержка для показа сообщения
-		} catch (err) {
-			const errorMessage = err.response?.data?.error || 'Try again';
+			setTimeout(() => navigate('/'), 1000);
+		} catch (err: any) {
+			const errorMessage = err?.response?.data?.error || 'Try again';
 			setError(`Registration failed: ${errorMessage}`);
-			console.error('Error details:', err.response?.data || err.message);
+			console.error('Error:', err?.response?.data || err.message);
 		}
 	};
+
+	const InputField = ({
+		label,
+		type,
+		value,
+		onChange,
+		required = true,
+		placeholder,
+	}: {
+		label: string;
+		type: string;
+		value: string;
+		onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+		required?: boolean;
+		placeholder?: string;
+	}) => (
+		<>
+			<label className={styles.label}>{label}</label>
+			<input
+				type={type}
+				value={value}
+				onChange={onChange}
+				placeholder={placeholder || label}
+				className={styles.input}
+				required={required}
+			/>
+		</>
+	);
+
+	const CheckboxField = ({
+		checked,
+		onChange,
+		label,
+		required = false,
+	}: {
+		checked: boolean;
+		onChange: () => void;
+		label: string;
+		required?: boolean;
+	}) => (
+		<label className={styles.checkboxLabel}>
+			<input
+				type="checkbox"
+				checked={checked}
+				onChange={onChange}
+				style={{ width: '24px', height: '24px', cursor: 'pointer' }}
+				required={required}
+			/>
+			{label}
+		</label>
+	);
 
 	return (
 		<>
 			<h2 className={styles.title}>CREATE AN ACCOUNT</h2>
+			<p className={styles.subtitle}>Welcome to NORDICNEST</p>
 			<form onSubmit={handleSubmit} className={styles.form}>
 				<div className={styles.formFieldsWrapper}>
-					<label className={styles.label}>First Name</label>
-					<input
+					<InputField
+						label="First Name"
 						type="text"
-						placeholder="First Name"
-						className={styles.input}
-						value={firstName}
-						onChange={(e) => setFirstName(e.target.value)}
-						required
+						value={formData.firstName}
+						onChange={handleChange('firstName')}
 					/>
-					<label className={styles.label}>Second Name</label>
-					<input
+					<InputField
+						label="Second Name"
 						type="text"
-						placeholder="Second Name"
-						className={styles.input}
-						value={secondName}
-						onChange={(e) => setSecondName(e.target.value)}
-						required
+						value={formData.secondName}
+						onChange={handleChange('secondName')}
 					/>
-					<label className={styles.label}>Email</label>
-					<input
-						type="mail"
-						placeholder="Email"
-						className={styles.input}
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						required
+					<InputField
+						label="Email"
+						type="email"
+						value={formData.email}
+						onChange={handleChange('email')}
 					/>
-					<label className={styles.label}>Password</label>
-					<input
+					<InputField
+						label="Password"
 						type="password"
-						placeholder="Password"
-						className={styles.input}
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
+						value={formData.password}
+						onChange={handleChange('password')}
 					/>
-					<label className={styles.label}>Repeat Password</label>
-					<input
+					<InputField
+						label="Repeat Password"
 						type="password"
-						placeholder="Repeat Password"
-						className={styles.input}
-						value={repeatPassword}
-						onChange={(e) => setRepeatPassword(e.target.value)}
-						required
+						value={formData.repeatPassword}
+						onChange={handleChange('repeatPassword')}
 					/>
 
-					{/* Чекбоксы */}
-					<label className={styles.checkboxLabel}>
-						<input
-							type="checkbox"
-							checked={agreeTerms}
-							onChange={() => setAgreeTerms(!agreeTerms)}
-							style={{
-								width: '24px',
-								height: '24px',
-								cursor: 'pointer',
-							}}
-						/>
-						I want to receive special offers via email.
-					</label>
-
-					<label className={styles.checkboxLabel}>
-						<input
-							type="checkbox"
-							checked={subscribe}
-							onChange={() => setSubscribe(!subscribe)}
-							style={{
-								width: '24px',
-								height: '24px',
-								cursor: 'pointer',
-              }}
-              required
-						/>
-						I agree with the privacy policy
-					</label>
+					<CheckboxField
+						checked={agreeTerms}
+						onChange={() => setAgreeTerms(!agreeTerms)}
+						label="I want to receive special offers via email."
+					/>
+					<CheckboxField
+						checked={subscribe}
+						onChange={() => setSubscribe(!subscribe)}
+						label="I agree with the privacy policy"
+						required
+					/>
 				</div>
 
 				{error && <p className={styles.error}>{error}</p>}

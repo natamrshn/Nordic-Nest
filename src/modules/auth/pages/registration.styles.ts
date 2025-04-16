@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 import { fonts } from '~shared/styles';
 
 export const form = css`
-	margin: 100px auto;
+	margin: 20px auto;
 	background-color: transparent;
 	position: relative;
 	width: 400px;
@@ -12,15 +12,20 @@ export const formFieldsWrapper = css`
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	margin-top: 80px;
+`;
+
+export const subtitle = css`
+	text-align: center;
+	margin-top: 20px;
+	font-size: 16px;
 `;
 
 export const title = css`
 	font-size: 54px;
-  font-family: ${fonts.primary};
+	font-family: ${fonts.primary};
 	font-weight: 700;
 	text-align: center;
-	margin-bottom: 20px;
+	margin-top: 120px;
 `;
 
 export const label = css`
@@ -32,7 +37,7 @@ export const label = css`
 
 export const input = css`
 	padding: 12px 24px;
-  background-color: transparent;
+	background-color: transparent;
 	width: 100%;
 	font-size: 18px;
 	border: none;
@@ -52,7 +57,7 @@ export const button = css`
 	color: white;
 	font-size: 24px;
 	font-weight: 400;
-  font-family: ${fonts.secondary};
+	font-family: ${fonts.secondary};
 	border: none;
 	cursor: pointer;
 	background-color: #887a7a;
@@ -65,13 +70,13 @@ export const button = css`
 
 export const checkboxLabel = css`
 	font-size: 14px;
-  font-family: ${fonts.secondary};
-  font-weight: 400;
+	font-family: ${fonts.secondary};
+	font-weight: 400;
 	display: flex;
 	align-items: center;
 	gap: 8px;
 	margin-top: 8px;
-  text-align: center;
+	text-align: center;
 `;
 
 export const error = css`
