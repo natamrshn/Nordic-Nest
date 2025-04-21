@@ -11,6 +11,7 @@ export const enum ROUTER_KEYS {
 	KITCHEN = '/kitchen',
 	LIVING_ROOM ='/living room',
 	BED_ROOM ='/bedroom',
+	FAVOURITE ='/favourites',
 }
 
 export const STORAGE_KEYS = Object.freeze({
