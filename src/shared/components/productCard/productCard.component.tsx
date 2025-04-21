@@ -13,7 +13,7 @@ import {
 	priceStyle,
 	titleStyle,
 } from './productCard.styles';
-import useStore from '../../stores/card.store'; // Не забудь імпортувати свій Zustand store
+import useStore from '../../stores/card.store';
 
 interface ProductCardProps {
 	id: string;
@@ -32,13 +32,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
 	category,
 	isNew,
 }) => {
-	const { addToCart, toggleFavorite, favorites } = useStore();
+	const { addToCart, toggleFavorite, favourites } = useStore();
 
-	const isFavoriteNow = favorites.some((item) => item.id === id);
+	const isFavoriteNow = favourites.some((item) => item.id === id);
 
 	const handleToggleFavorite = () => {
 		toggleFavorite({ id, mainImage, title, price, category, isNew });
-		console.log('Favorites:', useStore.getState().favorites);
+		console.log('Favorites:', useStore.getState().favourites);
 		
 	};
 

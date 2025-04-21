@@ -3,6 +3,10 @@
 		"esModuleInterop": true,
 		"baseUrl": ".",
 		"jsx": "react-jsx",
+		"lib": [
+			"dom",
+			"es2015"
+		],
 		"paths": {
 			"~assets/*": [
 				"src/assets/*"
@@ -21,15 +25,6 @@
 			],
 			"~types/*": [
 				"src/types/*"
-			],
-			"~stores/*": [
-				"src/shared/stores/*"
-			],
-			"~about-us/*": [
-				"src/modules/about-us/*"
-			],
-			"~ai/*": [
-				"src/modules/ai/*"
 			]
 		}
 	}

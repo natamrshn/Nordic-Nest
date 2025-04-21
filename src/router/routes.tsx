@@ -6,6 +6,7 @@ import AboutUsPage from '~modules/abouts- us/page/abouts-us.page';
 import AI from '~modules/ai/ai.page';
 
 import { LoginPage } from '~modules/auth/pages';
+import FavouritesPage from '~modules/favourites/favouritesPage';
 import FindUsPage from '~modules/find/page/find-us.page';
 import { HomePage } from '~modules/home/pages/home.page';
 import KitchenPage from '~modules/kitchen/page/kitchen.page';
@@ -20,6 +21,7 @@ export const publicRoutes = (
 		<Route path={ROUTER_KEYS.LIVING_ROOM} element={<LivingRoomPage />} />
 		<Route path={ROUTER_KEYS.BED_ROOM} element={<BedRoomPage />} />
 		<Route path={ROUTER_KEYS.ABOUT_US} element={<AboutUsPage />} />
+		<Route path={ROUTER_KEYS.FAVOURITE} element={<FavouritesPage />} />
 
 		<Route path={ROUTER_KEYS.FIND_US} element={<FindUsPage />} />
 
