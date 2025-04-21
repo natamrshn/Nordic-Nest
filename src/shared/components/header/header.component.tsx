@@ -21,6 +21,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = React.memo(({ onShopClick }) => {
 	const location = useLocation();
+	const _ = useScroll();
 	const isHomePage = location.pathname === '/'; // Перевіряємо, чи це головна сторінка
 	const isLight = useThemeStore((state) => state.isLight);
 
