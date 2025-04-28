@@ -10,6 +10,7 @@ import Navigation from "~shared/components/header/components/navigation/navigati
 import Space from "~shared/components/space/space";
 import ModalImg from "~shared/components/modalImg/modalImg";
 import { useThemeStore } from "~shared/stores/theme.store";
+import { modalContent } from "~shared/components/modal shop/modal.styles";
 
 const App = (): React.ReactNode => {
   const { pathname } = useLocation();
@@ -62,7 +63,7 @@ const App = (): React.ReactNode => {
       <MainRouter />
       <Footer />
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal positionClass={modalContent} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div
           ref={modalRef}
           style={{

@@ -4,14 +4,15 @@ interface ModalProps {
     isOpen: boolean;
     onClose: () => void;
     children: React.ReactNode;
+    positionClass?: string; 
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, positionClass }) => {
     if (!isOpen) return null; 
 
     return (
         <div className={modalOverlay} onClick={onClose}>
-            <div className={modalContent} onClick={(e) => e.stopPropagation()}>
+            <div className={`${positionClass || ''}`} onClick={(e) => e.stopPropagation()}>
                 {children}
             </div>
         </div>

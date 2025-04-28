@@ -25,6 +25,12 @@
 			],
 			"~types/*": [
 				"src/types/*"
+			],
+			"~favourites – копія/*": [
+				"src/modules/favourites – копія/*"
+			],
+			"~card/*": [
+				"src/modules/card/*"
 			]
 		}
 	}

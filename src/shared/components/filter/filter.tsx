@@ -1,156 +1,149 @@
 import React, { useState } from "react";
-const furniture = ["Lighting",
-  "Sofas",
- " Sliding Wardrobes",
-  'Tables',
-  'Chairs',
- ' Headboards & Beds',
-'  Cabionets & Sideboards'];
+import "rc-slider/assets/index.css";
+import Range from "rc-slider";
+import { 
+  button, 
+  buttonWrite, 
+  closeButton, 
+  filter, 
+  furnitureName, 
+  price, 
+  priceName, 
+  rangeStyles, 
+  sort, 
+  sortName, 
+  title, 
+  titlecontainer 
+} from "./filter.style";
 
-const FilterComponent = ({ onFilterChange}) => {
+
+interface FurnitureItem {
+  id: number;
+  title: string;
+}
+interface FilterProps {
+  furniture: FurnitureItem[]
+  onFilterChange: (filters: {
+    sortOrder: string;
+    selectedCategory: string;
+    priceRange: [number, number];
+  }) => void;
+  onClose?: () => void;
+}
+
+const FilterComponent: React.FC<FilterProps> = ({furniture, onFilterChange, onClose }) => {
   const [sortOrder, setSortOrder] = useState("asc");
-  const [selectedCategory, setSelectedCategory] = useState("");
-  // const [priceRange, setPriceRange] = useState<number>(2000);
+  const [selectedCategoryIndexes, setSelectedCategoryIndexes] = useState<number[]>([]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 20000]);
 
-  // const handlePriceChange = (value: number, index: number) => {
-  //   setPriceRange((prev) => {
-  //     const updated = [...prev] as [number, number];
-  //     updated[index] = value;
-  //     if (updated[0] > updated[1]) {
-  //       [updated[0], updated[1]] = [updated[1], updated[0]];
-  //     }
-  //     return updated;
-  //   });
-  // };
-  
-  const [priceRange, setPriceRange] = useState<[number, number]>([100, 1500]);
-
-const handlePriceChange = (value: number, index: number) => {
-  setPriceRange((prev) => {
-    const updated: [number, number] = [...prev];
-    updated[index] = value;
-
-    // Гарантуємо, що мін не перевищує макс
-    if (updated[0] > updated[1]) {
-      [updated[0], updated[1]] = [updated[1], updated[0]];
-    }
-
-    return updated;
-  });
-};
-
-
-
-  const handleSortChange = (e) => {
+  const handleSortChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSortOrder(e.target.value);
-    onFilterChange({ sortOrder: e.target.value, selectedCategory, priceRange });
   };
 
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-
-  const handleCheckboxChange = (type: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(type)
-        ? prev.filter((item) => item !== type)
-        : [...prev, type]
+  const handleCheckboxChange = (id: number) => {
+    setSelectedCategoryIndexes((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     );
   };
 
+  const handleApplyFilters = () => {
+    const categoryIds = selectedCategoryIndexes.join(",");
+    onFilterChange({
+      sortOrder,
+      selectedCategory: categoryIds,
+      priceRange,
+    });
+    if (onClose) onClose();
+  };
 
+  const handleResetFilters = () => {
+    setSortOrder("asc");
+    setSelectedCategoryIndexes([]);
+    setPriceRange([0, 20000]);
+    onFilterChange({
+      sortOrder: "asc",
+      selectedCategory: "",
+      priceRange: [0, 20000],
+    });
+    if (onClose) onClose();
+  };
 
   return (
-    <div className="filter-container">
-      Filter
-      <label>Price range: {priceRange[0]} - {priceRange[1]}</label>
-      <div>
-      <label>Max Price: {priceRange}</label>
-      <label>Price range: {priceRange[0]} - {priceRange[1]}</label>
-<div>
-  <input
-    type="range"
-    min={20}
-    max={2000}
-    step={10}
-    value={priceRange[0]}
-    onChange={(e) => handlePriceChange(Number(e.target.value), 0)}
-  />
-  <input
-    type="range"
-    min={20}
-    max={2000}
-    step={10}
-    value={priceRange[1]}
-    onChange={(e) => handlePriceChange(Number(e.target.value), 1)}
-  />
-</div>
-
-
-        {/* <input
-          type="range"
-          min="20"
-          max="2000"
-          value={priceRange[1]}
-          onChange={(e) => handlePriceChange(Number(e.target.value), 1)}
-        /> */}
+    <div className={filter}>
+      <div className={titlecontainer}>
+        <h3 className={title}>Filter</h3>
+        {onClose && (
+          <button onClick={onClose} className={closeButton}>
+            x
+          </button>
+        )}
       </div>
 
-    <label>Sort by:</label>
-<div onChange={handleSortChange}>
-  <label>
-    <input
-      type="radio"
-      name="sort"
-      value="asc"
-      checked={sortOrder === "asc"}
-    />
-    Low to High
-  </label>
-  <br />
-  <label>
-    <input
-      type="radio"
-      name="sort"
-      value="desc"
-      checked={sortOrder === "desc"}
-    />
-    High to Low
-  </label>
-  <br />
-  <label>
-    <input
-      type="radio"
-      name="sort"
-      value="bestsellers"
-      checked={sortOrder === "bestsellers"}
-    />
-    Bestsellers
-  </label>
-  <br />
-    <label>
-      <input
-        type="radio"
-        name="sort"
-        value="new"
-        checked={sortOrder === "new"}
-      />
-      New In
-    </label>
-  </div>
+      <div className={sort}>
+        <div>
+          <label className={priceName}>Price</label>
+          <p className={price}>Price: {priceRange[0]}$ — {priceRange[1]}$</p>
+          <Range
+            className={rangeStyles}
+            range
+            min={0}
+            max={20000}
+            step={100}
+            value={priceRange}
+            onChange={(value) => {
+              if (Array.isArray(value)) {
+                setPriceRange(value as [number, number]);
+              }
+            }}
+          />
+        </div>
+      </div>
 
-      <label>Furniture Type:</label>
-      <div>
-        {furniture.map((type, index) => (
-          <label key={index} style={{ display: "block" }}>
-            <input
-              type="checkbox"
-              value={type}
-              checked={selectedCategories.includes(type)}
-              onChange={() => handleCheckboxChange(type)}
-            />
-            {type}
+      <div className={sort}>
+        <label>Sort by:</label>
+        <div>
+          <label className={sortName}>
+            <input type="radio" name="sort" value="asc" checked={sortOrder === "asc"} onChange={handleSortChange} />
+            Low to High
           </label>
-        ))}
-      </div>     
+          <br />
+          <label className={sortName}>
+            <input type="radio" name="sort" value="desc" checked={sortOrder === "desc"} onChange={handleSortChange} />
+            High to Low
+          </label>
+          <br />
+          <label className={sortName}>
+            <input type="radio" name="sort" value="bestsellers" checked={sortOrder === "bestsellers"} onChange={handleSortChange} />
+            Bestsellers
+          </label>
+          <br />
+          <label className={sortName}>
+            <input type="radio" name="sort" value="new" checked={sortOrder === "new"} onChange={handleSortChange} />
+            New in
+          </label>
+        </div>
+      </div>
+
+      <div className={sort}>
+        <label>Furniture Type</label>
+        <div className={furnitureName}>
+          {furniture.map(({ id, title }) => (
+            <label className={sortName} key={id} style={{ display: "block" }}>
+              <input
+                type="checkbox"
+                checked={selectedCategoryIndexes.includes(id)}
+                onChange={() => handleCheckboxChange(id)}
+              />
+              {title}              
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <button onClick={handleApplyFilters} className={button}>Submit</button>
+        <button onClick={handleResetFilters} className={buttonWrite}>Clear all</button>
+      </div>
     </div>
   );
 };
