@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useStore from '../../shared/stores/card.store'
 import BreadCrumbs from '~shared/components/Bread crumbs/Bread crumbs'
 import {
@@ -20,6 +20,9 @@ import {
 import { addToCartButton, overlay } from '~shared/components/productCard/productCard.styles'
 
 const FavouritesPage: React.FC = () => {
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [lastAddedId, setLastAddedId] = useState<string | null>(null);
+
 	const favourites = useStore((state) => state.favourites)
 	const toggleFavorite = useStore((state) => state.toggleFavorite)
 	const addToCart = useStore((state) => state.addToCart)
@@ -27,9 +30,16 @@ const FavouritesPage: React.FC = () => {
 	const cart = useStore((state) => state.cart)
 
   const handleAddToCart = (item) => {
-		addToCart(item);
-		console.log('Cart:', useStore.getState().cart);
-	};
+    addToCart(item);
+    setSuccessMessage(`"${item.title}" додано до кошика 🛒`);
+    setLastAddedId(item.id);
+  
+    setTimeout(() => {
+      setSuccessMessage(null);
+      setLastAddedId(null);
+    }, 2000);
+  };
+  
 
 	if (favourites.length === 0) {
 		return (
@@ -41,7 +51,7 @@ const FavouritesPage: React.FC = () => {
 
 	const getQuantity = (id: string) => {
 		const item = cart.find((item) => item.id === id)
-		return item?.quantity || 1
+		return item?.amount || 1
 	}
 
 	return (
@@ -54,10 +64,10 @@ const FavouritesPage: React.FC = () => {
 			      <div className={productMain}>
               <img src={item.mainImage} alt={item.title} className={productImage} />
               <div>
-                <h3 className={productName}>{item.title}</h3>
-                <p className={productCategory}> For {item.category}</p>
+              <h3 className={productName}>{item.title}</h3>
+              <p className={productCategory}> For {item.category}</p>
 
-                <div className={quantityControls}>
+              {/* <div className={quantityControls}>
                   <div className={quantityContainer}>
                     <button className={qtyButton} onClick={() => removeFromCart(item.id)}>
                       −
@@ -70,16 +80,20 @@ const FavouritesPage: React.FC = () => {
                 
 
                 
-              </div>
+              </div> */}
                 <p className="">${item.price}</p>
-              </div>				
+                </div>				
 
               
               <button className={removeButton} onClick={() => toggleFavorite(item)}>
                 x
               </button>
             </div>
-
+            {successMessage && item.id===lastAddedId && (
+              <div style={{ marginBottom: '1rem', color: 'grey', fontWeight: 'bold' }}>
+                {successMessage}
+              </div>
+            )}
             <div className={addToCarts}>
               <div className={addToCartButton} onClick={()=>handleAddToCart(item)}>
                 ADD TO CART

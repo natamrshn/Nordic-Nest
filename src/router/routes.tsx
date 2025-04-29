@@ -4,6 +4,11 @@ import BedRoomPage from '~modules/BedRoom/page/bedRoom.page';
 import AboutUsPage from '~modules/abouts- us/page/abouts-us.page';
 import AI from '~modules/ai/ai.page';
 import RegisterForm from '~modules/auth/pages/registration.page';
+
+
+
+import CartPage from '~modules/card/cartPage';
+
 import FavouritesPage from '~modules/favourites/favouritesPage';
 
 import FindUsPage from '~modules/find/page/find-us.page';
@@ -24,6 +29,7 @@ export const publicRoutes = (
 		<Route path={ROUTER_KEYS.BED_ROOM} element={<BedRoomPage />} />
 		<Route path={ROUTER_KEYS.ABOUT_US} element={<AboutUsPage />} />
 		<Route path={ROUTER_KEYS.FAVOURITE} element={<FavouritesPage />} />
+		<Route path={ROUTER_KEYS.CART} element={<CartPage />} />
 
 		<Route path={ROUTER_KEYS.FIND_US} element={<FindUsPage />} />
 

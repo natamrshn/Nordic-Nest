@@ -57,9 +57,10 @@ async function createCategory(data) {
 }
 
 
-async function getCategoriesByType(type) {
+export async function getCategoriesByType(type) {
     const response = await fetch(`${BASE_URL}/type?type=${type}`);
-    return response.json();
+    const data = await response.json();
+    return data.content ?? [];
 }
 
 

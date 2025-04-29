@@ -30,17 +30,7 @@ const CategorySlider: React.FC = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
 
-	useEffect(() => {
-		setIsLoading(true);
-		getAllCategories()
-			.then(setCategories)
-			.catch(() => {
-				setIsError(true);
-				setCategories([]);
-			})
-			setIsLoading(false);
-			
-	}, []);
+	
 
 	const goNext = () => sliderRef.current?.slickNext();
 	const goPrev = () => sliderRef.current?.slickPrev();
