@@ -31,6 +31,12 @@
 			],
 			"~card/*": [
 				"src/modules/card/*"
+			],
+			"~favorites/*": [
+				"src/modules/favorites/*"
+			],
+			"~favourites/*": [
+				"src/modules/favourites/*"
 			]
 		}
 	}

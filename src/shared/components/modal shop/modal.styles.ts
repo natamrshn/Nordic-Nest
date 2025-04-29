@@ -10,7 +10,7 @@ export const modalOverlay = css`
 
 export const modalContent = css`
     position: fixed;
-    top: 90px;
+    top: 120px;
     left: 0;
     right: 0;
     display: flex;
@@ -18,4 +18,8 @@ export const modalContent = css`
     background: rgba(247, 246, 244, 1);
     padding: 50px 0;
     border-radius: 5px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    background: rgba(247, 246, 244, 1);
+    z-index: 1000;
+    hight: 400px;
 `;
