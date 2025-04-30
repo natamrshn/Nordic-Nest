@@ -26,7 +26,6 @@
 			"~types/*": [
 				"src/types/*"
 			],
-
 			"~favourites – копія/*": [
 				"src/modules/favourites – копія/*"
 			],
@@ -38,10 +37,9 @@
 			],
 			"~favourites/*": [
 				"src/modules/favourites/*"
-
+			],
 			"~search/*": [
 				"src/modules/search/*"
-
 			]
 		}
 	}
