@@ -16,6 +16,8 @@ import { HomePage } from '~modules/home/pages/home.page';
 import KitchenPage from '~modules/kitchen/page/kitchen.page';
 import LivingRoomPage from '~modules/livingRoom/page/livingRoom.page';
 
+
+
 import { ROUTER_KEYS } from '~shared/keys';
 import SearchResultsPage from '~modules/search/Seacrh.page';
 
