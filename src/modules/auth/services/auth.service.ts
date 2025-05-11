@@ -1,41 +1,74 @@
-import { HttpFactoryService } from '~shared/services/http-factory.service';
-import { EnhancedWithAuthHttpService } from '~shared/services/http-auth.service';
-import { Tokens } from '../types/tokens.type';
+import axios from 'axios';
 
-export class AuthService {
-	private static authHttpService: EnhancedWithAuthHttpService =
-		new HttpFactoryService().createAuthHttpService();
+const API_URL = 'http://ec2-16-16-187-41.eu-north-1.compute.amazonaws.com';
 
-	static async login(email: string, password: string): Promise<Tokens> {
-		const data = { email, password };
-		return this.authHttpService.post<Tokens, typeof data>(
-			'auth/admin/signin',
-			data,
-		);
-	}
-
-	static async refreshTokens(refreshToken: string): Promise<Tokens> {
-		const config = {
-			headers: {
-				Authorization: `Bearer ${refreshToken}`,
-			},
-		};
-
-		return this.authHttpService.get<Tokens>('auth/refresh', config);
-	}
-
-	static async logout(accessToken: string): Promise<{ message: string }> {
-		const config = {
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-			},
-		};
-
-		return this.authHttpService.get<{ message: string }>(
-			'auth/logout',
-			config,
-		);
-	}
+interface RegisterData {
+	email: string;
+	password: string;
+	repeatPassword: string;
+	firstName: string;
+	secondName: string;
 }
 
-export default AuthService;
+interface RegisterResponse {
+	accessToken: string;
+	id: number;
+	email: string;
+	firstName: string;
+	secondName: string;
+}
+
+export class AuthService {
+	static async register(data: RegisterData): Promise<RegisterResponse> {
+		try {
+			const response = await axios.post<RegisterResponse>(
+				`${API_URL}/auth/registration`,
+				data,
+				{
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+			// Сохраняем токен в localStorage
+			if (response.data.accessToken) {
+				localStorage.setItem('accessToken', response.data.accessToken);
+			}
+			return response.data;
+		} catch (error) {
+			console.error(
+				'Registration error:',
+				error.response?.data || error.message,
+			);
+			throw error;
+		}
+	}
+
+	static async login(
+		email: string,
+		password: string,
+	): Promise<RegisterResponse> {
+		try {
+			const response = await axios.post<RegisterResponse>(
+				`${API_URL}/auth/login`,
+				{ email, password },
+				{
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
+			// Сохраняем токен в localStorage
+			if (response.data.accessToken) {
+				localStorage.setItem('accessToken', response.data.accessToken);
+			}
+			return response.data;
+		} catch (error) {
+			console.error(
+				'Login error:',
+				error.response?.data || error.message,
+			);
+			throw error;
+		}
+	}
+}

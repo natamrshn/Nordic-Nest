@@ -1,17 +1,46 @@
 {
 	"compilerOptions": {
-	  "esModuleInterop": true,
-	  "baseUrl": ".",
-	  "jsx": "react-jsx",
-	  "paths": {
-		"~assets/*": ["src/assets/*"],
-		"~modules/*": ["src/modules/*"],
-		"~router/*": ["src/router/*"],
-		"~shared/*": ["src/shared/*"],
-		"~/*": ["src/*"],
-		"~types/*": ["src/types/*"],
-		"~kitchen/*": ["src/modules/kitchen/*"],
-		"~constants/*": ["src/shared/constants/*"]
-	  }
+		"esModuleInterop": true,
+		"baseUrl": ".",
+		"jsx": "react-jsx",
+		"lib": [
+			"dom",
+			"es2015"
+		],
+		"paths": {
+			"~assets/*": [
+				"src/assets/*"
+			],
+			"~modules/*": [
+				"src/modules/*"
+			],
+			"~router/*": [
+				"src/router/*"
+			],
+			"~shared/*": [
+				"src/shared/*"
+			],
+			"~/*": [
+				"src/*"
+			],
+			"~types/*": [
+				"src/types/*"
+			],
+			"~favourites – копія/*": [
+				"src/modules/favourites – копія/*"
+			],
+			"~card/*": [
+				"src/modules/card/*"
+			],
+			"~favorites/*": [
+				"src/modules/favorites/*"
+			],
+			"~favourites/*": [
+				"src/modules/favourites/*"
+			],
+			"~search/*": [
+				"src/modules/search/*"
+			]
+		}
 	}
 }
