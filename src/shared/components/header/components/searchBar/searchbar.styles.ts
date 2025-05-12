@@ -1,6 +1,5 @@
 import { css } from '@emotion/css';
-import { c } from 'vite/dist/node/moduleRunnerTransport.d-CXw_Ws6P';
-import { colors, fonts } from '~shared/styles';
+import { colors } from '~shared/styles';
 
 export const search = css`
 	position: relative;
@@ -13,12 +12,13 @@ export const input = (isLight: boolean) => css`
 	padding-left: 32px;
 	border: none;
 	border-bottom: 1px solid ${isLight ? colors.black : colors.white};
+	color: ${isLight ? colors.black : colors.white};
 	outline: none;
 	font-size: 16px;
 	background: transparent;
 
 	&::placeholder {
-		color: ${colors.nude};
+		color: ${isLight ? colors.black : colors.white};
 	}
 `;
 
