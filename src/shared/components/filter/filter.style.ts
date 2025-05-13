@@ -112,6 +112,7 @@ export const button = css`
 `;
 
 export const buttonWrite = css`
+  display: block;
   height: 36px;
   width: 200px;
   background: trapsporant;

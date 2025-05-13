@@ -100,8 +100,8 @@ export const description = css`
 
 export const LeftPanelModal = css`
   height: 100%;
-  width: 15rem;
-  padding: 0 110px;
+  // width: 15rem;
+  padding: 0 100px;
   margin-left: 0;
   position: fixed;
   top: 0;
@@ -109,6 +109,6 @@ export const LeftPanelModal = css`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
   background: rgba(247, 246, 244, 1);
   z-index: 1000;
-  hight: 400px;
+  overflow-y: auto;
 
 `;

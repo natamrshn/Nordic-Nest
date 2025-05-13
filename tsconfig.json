@@ -7,7 +7,6 @@
 			"dom",
 			"es2015"
 		],
-
 		"paths": {
 			"~assets/*": [
 				"src/assets/*"
@@ -25,10 +24,8 @@
 				"src/*"
 			],
 			"~types/*": [
-			"src/types/*"
-
+				"src/types/*"
 			],
-		
 			"~card/*": [
 				"src/modules/card/*"
 			],
