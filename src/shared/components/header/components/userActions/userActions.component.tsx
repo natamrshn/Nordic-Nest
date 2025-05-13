@@ -8,21 +8,31 @@ import LogIconDark from '~/assets/icon-login-dark.svg';
 import CartIconLight from '~/assets/icon-cart.svg';
 import CartIconDark from '~/assets/icon-cart-dark.svg';
 import { useThemeStore } from '~shared/stores/theme.store';
+import { useState } from 'react';
+import LoginModal from '~modules/auth/pages/login.page';
 
-const UserActions: React.FC = () => {
+export const UserActions: React.FC = () => {
 	const isLight = useThemeStore((state) => state.isLight);
+	const [isLoginOpen, setLoginOpen] = useState(false);
+
+	const openLogin = () => setLoginOpen(true);
+	const closeLogin = () => setLoginOpen(false);
 
 	return (
 		<div className={box}>
 			<Link to={'/favourites'}>
 				{isLight ? <FavIconDark /> : <FavIconLight />}
 			</Link>
-			<Link to={'/login'}>
+
+			<div onClick={openLogin} style={{ cursor: 'pointer' }}>
 				{isLight ? <LogIconDark /> : <LogIconLight />}
-			</Link>
+			</div>
+
 			<Link to={'/cart'}>
 				{isLight ? <CartIconDark /> : <CartIconLight />}
 			</Link>
+
+			{isLoginOpen && <LoginModal onClose={closeLogin} />}
 		</div>
 	);
 };

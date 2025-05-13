@@ -3,6 +3,11 @@
 		"esModuleInterop": true,
 		"baseUrl": ".",
 		"jsx": "react-jsx",
+		"lib": [
+			"dom",
+			"es2015"
+		],
+
 		"paths": {
 			"~assets/*": [
 				"src/assets/*"
@@ -22,7 +27,14 @@
 			"~types/*": [
 				"src/types/*"
 			],
-	   "search/*": [
+		
+			"~card/*": [
+				"src/modules/card/*"
+			],
+			"~favourites/*": [
+				"src/modules/favourites/*"
+			],
+			"~search/*": [
 				"src/modules/search/*"
 			]
 		}

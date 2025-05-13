@@ -39,15 +39,15 @@ async function createProduct(productData) {
 }
 
 // GET /products/search - Search products with advanced filtering
-// export async function searchProducts(queryParams, page, count) {
-//     const queryString = new URLSearchParams(queryParams).toString();
-//     const response = await fetch(`${BASE_URL}products/search?${queryString}&page_number=${page}&page_size=${count}`);
+export async function searchProducts(queryParams, page, count) {
+    const queryString = new URLSearchParams(queryParams).toString();
+    const response = await fetch(`${BASE_URL}products/search?${queryString}&page_number=${page}&page_size=${count}`);
 
-//     if (!response.ok) {
-//         throw new Error(`Ошибка запроса: ${response.status}`);
-//     }
+    if (!response.ok) {
+        throw new Error(`Ошибка запроса: ${response.status}`);
+    }
 
-//     const data = await response.json();
-//     return data.products.content; 
-// }
+    const data = await response.json();
+    return data.products.content; 
+}
 
