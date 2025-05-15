@@ -1,40 +1,48 @@
 {
-	"compilerOptions": {
-		"esModuleInterop": true,
-		"baseUrl": ".",
-		"jsx": "react-jsx",
-		"lib": [
-			"dom",
-			"es2015"
-		],
-		"paths": {
-			"~assets/*": [
-				"src/assets/*"
-			],
-			"~modules/*": [
-				"src/modules/*"
-			],
-			"~router/*": [
-				"src/router/*"
-			],
-			"~shared/*": [
-				"src/shared/*"
-			],
-			"~/*": [
-				"src/*"
-			],
-			"~types/*": [
-				"src/types/*"
-			],
-			"~card/*": [
-				"src/modules/card/*"
-			],
-			"~favourites/*": [
-				"src/modules/favourites/*"
-			],
-			"~search/*": [
-				"src/modules/search/*"
-			]
-		}
-	}
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "ESNext",
+        "lib": [
+            "dom",
+            "es2015"
+        ],
+        "jsx": "react-jsx",
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "skipLibCheck": true,
+        "strict": true,
+        "baseUrl": ".",
+        "paths": {
+            "~assets/*": [
+                "src/assets/*"
+            ],
+            "~modules/*": [
+                "src/modules/*"
+            ],
+            "~router/*": [
+                "src/router/*"
+            ],
+            "~shared/*": [
+                "src/shared/*"
+            ],
+            "~types/*": [
+                "src/types/*"
+            ],
+            "~/*": [
+                "src/*"
+            ],
+            "~card/*": [
+                "src/modules/card/*"
+            ],
+            "~favourites/*": [
+                "src/modules/favourites/*"
+            ],
+            "~search/*": [
+                "src/modules/search/*"
+            ],
+            "~Tags/*": [
+                "src/modules/Tags/*"
+            ]
+        }
+    }
 }

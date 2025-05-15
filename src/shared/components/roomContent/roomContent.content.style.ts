@@ -26,7 +26,7 @@ export const filter = css`
 export const filterChange = css`
   position: relative;
   display: flex; 
-  // width: 224px;
+  width: 224px;
   height: 40px;
   padding: 0 10px;
   background:rgba(237, 235, 235, 1);
@@ -64,7 +64,7 @@ export const filterBlock = css`
   position: relative;
   display: flex; 
   margin-bottom: 10px;
-  // width: 224px;
+  width: 224px;
   height: 40px;
   background:rgba(237, 235, 235, 1);
   color: rgba(136, 122, 122, 1);
@@ -101,7 +101,7 @@ export const description = css`
 export const LeftPanelModal = css`
   height: 100%;
 
-  // padding: 0 110px;
+  padding: 0 100px;
   margin-left: 0;
   position: fixed;
   top: 0;
@@ -109,6 +109,6 @@ export const LeftPanelModal = css`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
   background: rgba(247, 246, 244, 1);
   z-index: 1000;
-  hight: 400px;
+  overflow-y: auto;
 
 `;

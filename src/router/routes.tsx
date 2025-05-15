@@ -20,18 +20,22 @@ import LivingRoomPage from '~modules/livingRoom/page/livingRoom.page';
 
 import { ROUTER_KEYS } from '~shared/keys';
 import SearchResultsPage from '~modules/search/Seacrh.page';
+import { Tags } from '~modules/Tags/tags.page';
 
 export const publicRoutes = (
 	<Routes>
 		<Route path={ROUTER_KEYS.HOME} element={<HomePage />} />
 		<Route path={ROUTER_KEYS.REGISTRATION} element={<RegisterForm />} />
-		<Route path={ROUTER_KEYS.KITCHEN} element={<KitchenPage />} />
+		{/* <Route path={ROUTER_KEYS.KITCHEN} element={<KitchenPage />} /> */}
 		<Route path="/products/search" element={<SearchResultsPage />} />
-		<Route path={ROUTER_KEYS.LIVING_ROOM} element={<LivingRoomPage />} />
-		<Route path={ROUTER_KEYS.BED_ROOM} element={<BedRoomPage />} />
+		{/* <Route path={ROUTER_KEYS.LIVING_ROOM} element={<LivingRoomPage />} />
+		<Route path={ROUTER_KEYS.BED_ROOM} element={<BedRoomPage />} /> */}
+		<Route path=":categoryName" element={<Tags />} />
 		<Route path={ROUTER_KEYS.ABOUT_US} element={<AboutUsPage />} />
 		<Route path={ROUTER_KEYS.FAVOURITE} element={<FavouritesPage />} />
 		<Route path={ROUTER_KEYS.CART} element={<CartPage />} />
+
+        
 
 		<Route path={ROUTER_KEYS.FIND_US} element={<FindUsPage />} />
 

@@ -4,7 +4,7 @@ import { NavLinkComponent } from "~shared/components/navLink/navLinkComponent";
 import { useProducts } from "~shared/hooks/usePoducts";
 import { ProductList } from "~shared/components/productList/productlist";
 
-import { LeftPanelModal, closeButton, container, description, filter, filterBlock, filterChange, filterContainer, filterTitle, furnitureContainer, icon, linkContainer, title } from "./kitchen.content.style";
+import { LeftPanelModal, closeButton, container, description, filter, filterBlock, filterChange, filterContainer, filterTitle, furnitureContainer, icon, linkContainer, title } from "./roomContent.content.style";
 import FilterComponent from "~shared/components/filter/filter";
 import FilterImg from '../../../assets/filter.png';
 import { getCategoriesByType } from "~shared/services/categorios.service";
@@ -13,7 +13,7 @@ import Modal from "../modal shop/modal";
 interface RoomContentProps {
   categoryId: string;
   categoryTitle: string;
-  descriptionText?: string;
+  categoryDescription: string;
 }
 
 interface Furniture {
@@ -23,13 +23,14 @@ interface Furniture {
     // imageUrl: string;
   }
 
-const RoomContent: React.FC<RoomContentProps> = ({ categoryId, categoryTitle, descriptionText }) => {
+const RoomContent: React.FC<RoomContentProps> = ({ categoryId, categoryTitle, categoryDescription }) => {
     const [furniture, setFurniture] = useState<Furniture[]>([]);
-    const [filterParams, setFilterParams] = useState({ categoryIds: '1', maxPrice: 20000 });
-    const { products, loading, hasMore, setPage } = useProducts({ categoryIds: filterParams.categoryIds });
-  
-  
+    const [filterParams, setFilterParams] = useState({ categoryIds: categoryId, maxPrice: 20000 });
     const [filters, setFilters] = useState({ selectedCategory: "",  sortOrder: 'asc',  priceRange: [0, 20000] });
+    const { products, loading, hasMore, setPage } = useProducts({ categoryIds: filters.selectedCategory || categoryId });
+  
+  
+    
    
     const [showFilters, setShowFilters] = useState(false);
     
@@ -138,7 +139,7 @@ const RoomContent: React.FC<RoomContentProps> = ({ categoryId, categoryTitle, de
         <h1 className={title}>{categoryTitle.toUpperCase()}</h1>    
         <div className={linkContainer}>
         <div className={description}>
-          <p>{descriptionText}</p>
+          <p>{categoryDescription}</p>
         </div>
           <NavLinkComponent />
         </div>
@@ -204,16 +205,14 @@ const RoomContent: React.FC<RoomContentProps> = ({ categoryId, categoryTitle, de
   
   
           </div>
-        )}
-  
-  
+        )}  
       
         <ProductList 
           products={sortedProducts} 
           loading={loading} 
           hasMore={hasMore} 
           setPage={setPage} 
-          category="Kitchen Room" 
+          category={categoryTitle}
         />
       </section>
     );

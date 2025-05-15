@@ -1,8 +1,7 @@
 export const SPACE_LINKS = [
-  { path: '/kitchen', label: 'Kitchen' }, 
-  { path: '/living room', label: 'Living Room' },
-  { path: '/bedroom', label: 'Bedroom' },
-  { path: '/bathroom', label: 'Bathroom' },
-  { path: '/office', label: 'Office' },
+  { id: 1, path: '/kitchen', label: 'Kitchen' }, 
+  { id: 2, path: '/living room', label: 'Living Room' },
+  { id: 3, path: '/bedroom', label: 'Bedroom' },
+  { id: 4, path: '/bathroom', label: 'Bathroom' },
+  { id: 5, path: '/office', label: 'Office' },
 ];
-  
