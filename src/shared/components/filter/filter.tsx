@@ -22,6 +22,7 @@ interface FurnitureItem {
   title: string;
 }
 interface FilterProps {
+  categoryId:string,
   furniture: FurnitureItem[]
   onFilterChange: (filters: {
     sortOrder: string;
@@ -31,7 +32,7 @@ interface FilterProps {
   onClose?: () => void;
 }
 
-const FilterComponent: React.FC<FilterProps> = ({furniture, onFilterChange, onClose }) => {
+const FilterComponent: React.FC<FilterProps> = ({categoryId, furniture, onFilterChange, onClose }) => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [selectedCategoryIndexes, setSelectedCategoryIndexes] = useState<number[]>([]);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 20000]);
@@ -60,9 +61,10 @@ const FilterComponent: React.FC<FilterProps> = ({furniture, onFilterChange, onCl
     setSortOrder("asc");
     setSelectedCategoryIndexes([]);
     setPriceRange([0, 20000]);
+    const newSelectedCategory = furniture.join(","); // формуємо новий рядок
     onFilterChange({
       sortOrder: "asc",
-      selectedCategory: "",
+      selectedCategory: furniture.length > 0 ? newSelectedCategory : categoryId,
       priceRange: [0, 20000],
     });
     if (onClose) onClose();
