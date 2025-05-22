@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ProductCard from '../productCard/productCard.component';
+import SidebarFilter from './SideBar';
 
 interface Category {
 	id: number;
@@ -14,10 +15,9 @@ interface Product {
 	article: string;
 	price: number;
 	mainImage: string;
-	category: string; // добавь если его нет
-	isNew: boolean; // добавь если его нет
+	category: string;
+	isNew: boolean;
 }
-
 
 const FilteredProductsPage = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -29,8 +29,14 @@ const FilteredProductsPage = () => {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+  const [minPriceLimit, setMinPriceLimit] = useState(0);
+  const [maxPriceLimit, setMaxPriceLimit] = useState(1000);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
 
+
+	// Загружаем выбранные категории из URL
 	useEffect(() => {
 		const categoryIds = searchParams.get('categoryIds');
 		if (categoryIds) {
@@ -42,6 +48,7 @@ const FilteredProductsPage = () => {
 		}
 	}, [searchParams]);
 
+	// Загружаем категории с сервера
 	useEffect(() => {
 		fetch(
 			'http://ec2-16-16-187-41.eu-north-1.compute.amazonaws.com/categories?page_size=50',
@@ -59,42 +66,55 @@ const FilteredProductsPage = () => {
 				});
 				setGroupedCategories(grouped);
 			})
-			.catch((err: Error) => {
-				console.error(err);
-			});
+			.catch((err: Error) => console.error(err));
 	}, []);
 
-	useEffect(() => {
-		if (selectedIds.length === 0) {
-			setProducts([]);
+	// Загружаем продукты по выбранным категориям
+useEffect(() => {
+	if (selectedIds.length === 0) {
+		setProducts([]);
+		setLoading(false);
+		return;
+	}
+
+	setLoading(true);
+	setError(null);
+	const idsString = selectedIds.join(',');
+
+	fetch(
+		`http://ec2-16-16-187-41.eu-north-1.compute.amazonaws.com/products/search?categoryIds=${idsString}`,
+	)
+		.then((res) => {
+			if (!res.ok) throw new Error('Ошибка загрузки продуктов');
+			return res.json();
+		})
+		.then((data) => {
+			const loadedProducts: Product[] = Array.isArray(
+				data.products?.content,
+			)
+				? data.products.content
+				: [];
+
+			setProducts(loadedProducts);
+
+			// Определяем min/max цены
+			if (loadedProducts.length > 0) {
+				const prices = loadedProducts.map((p) => p.price);
+				const min = Math.min(...prices);
+				const max = Math.max(...prices);
+				setMinPriceLimit(min);
+				setMaxPriceLimit(max);
+				setPriceRange([min, max]); // Установим по умолчанию весь диапазон
+			}
+
 			setLoading(false);
-			return;
-		}
+		})
+		.catch((err: Error) => {
+			setError(err.message);
+			setLoading(false);
+		});
+}, [selectedIds]);
 
-		setLoading(true);
-		setError(null);
-		const idsString = selectedIds.join(',');
-
-		fetch(
-			`http://ec2-16-16-187-41.eu-north-1.compute.amazonaws.com/products/search?categoryIds=${idsString}`,
-		)
-			.then((res) => {
-				if (!res.ok) throw new Error('Ошибка загрузки продуктов');
-				return res.json();
-			})
-			.then((data) => {
-				setProducts(
-					Array.isArray(data.products?.content)
-						? data.products.content
-						: [],
-				);
-				setLoading(false);
-			})
-			.catch((err: Error) => {
-				setError(err.message);
-				setLoading(false);
-			});
-	}, [selectedIds]);
 
 	const toggleSelectedId = (id: number) => {
 		const newSelected = selectedIds.includes(id)
@@ -102,11 +122,16 @@ const FilteredProductsPage = () => {
 			: [...selectedIds, id];
 		setSelectedIds(newSelected);
 		setSearchParams({ categoryIds: newSelected.join(',') });
-	};
+  };
+  
+const visibleProducts = products.filter(
+	(product) =>
+		product.price >= priceRange[0] && product.price <= priceRange[1],
+);
 
 	return (
 		<div style={{ fontFamily: 'Arial, sans-serif' }}>
-			{/* Кнопка открытия фильтра (иконка) */}
+			{/* Кнопка фильтра (открыть) */}
 			{!isSidebarOpen && (
 				<button
 					onClick={() => setIsSidebarOpen(true)}
@@ -140,79 +165,21 @@ const FilteredProductsPage = () => {
 				</button>
 			)}
 
-			{/* Боковая панель */}
-			<div
-				style={{
-					position: 'fixed',
-					top: 0,
-					left: isSidebarOpen ? 0 : '-300px',
-					width: '280px',
-					height: '100%',
-					backgroundColor: '#f9f9f9',
-					boxShadow: '2px 0 6px rgba(0,0,0,0.1)',
-					padding: '20px',
-					overflowY: 'auto',
-					transition: 'left 0.3s ease',
-					zIndex: 1000,
-				}}
-			>
-				{/* Кнопка закрытия (крестик) */}
-				<button
-					onClick={() => setIsSidebarOpen(false)}
-					style={{
-						position: 'absolute',
-						top: '10px',
-						right: '10px',
-						background: 'transparent',
-						border: 'none',
-						cursor: 'pointer',
-						padding: '5px',
-					}}
-					title="Закрыть"
-				>
-					<svg width="24" height="24" fill="#333" viewBox="0 0 24 24">
-						<path
-							d="M18 6L6 18M6 6l12 12"
-							stroke="#333"
-							strokeWidth="2"
-							strokeLinecap="round"
-						/>
-					</svg>
-				</button>
+			{/* 👉 ВСТАВЛЯЕМ SidebarFilter */}
+			<SidebarFilter
+				groupedCategories={groupedCategories}
+				selectedIds={selectedIds}
+				toggleSelectedId={toggleSelectedId}
+				onClose={() => setIsSidebarOpen(false)}
+				isOpen={isSidebarOpen}
+				minPriceLimit={minPriceLimit}
+				maxPriceLimit={maxPriceLimit}
+				priceRange={priceRange}
+				setPriceRange={setPriceRange}
+			/>
 
-				<h2 style={{ marginTop: '30px' }}>Фильтр</h2>
-				{Object.entries(groupedCategories).map(([type, cats]) => (
-					<div key={type} style={{ marginBottom: '16px' }}>
-						<h3>{type}</h3>
-						{cats.map((cat) => (
-							<label
-								key={cat.id}
-								style={{
-									display: 'block',
-									marginBottom: '6px',
-									cursor: 'pointer',
-								}}
-							>
-								<input
-									type="checkbox"
-									checked={selectedIds.includes(cat.id)}
-									onChange={() => toggleSelectedId(cat.id)}
-									style={{ marginRight: '6px' }}
-								/>
-								{cat.title}
-							</label>
-						))}
-					</div>
-				))}
-			</div>
-
-			{/* Контент */}
-			<div
-				style={{
-					padding: '20px',
-					marginTop: '140px',
-				}}
-			>
+			{/* Контент товаров */}
+			<div style={{ padding: '20px', marginTop: '140px' }}>
 				<h2>Результаты</h2>
 				{loading && <div>Загрузка товаров...</div>}
 				{error && <div style={{ color: 'red' }}>Ошибка: {error}</div>}
@@ -221,7 +188,7 @@ const FilteredProductsPage = () => {
 				)}
 
 				<div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-					{products.map((product) => (
+					{visibleProducts.map((product) => (
 						<ProductCard
 							key={product.id}
 							id={product.id}
