@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import BedRoomPage from '~modules/BedRoom/page/bedRoom.page';
 import AboutUsPage from '~modules/abouts- us/page/abouts-us.page';
 import AI from '~modules/ai/ai.page';
 import RegisterForm from '~modules/auth/pages/registration.page';
@@ -13,14 +12,11 @@ import FavouritesPage from '~modules/favourites/favouritesPage';
 
 import FindUsPage from '~modules/find/page/find-us.page';
 import { HomePage } from '~modules/home/pages/home.page';
-import KitchenPage from '~modules/kitchen/page/kitchen.page';
-import LivingRoomPage from '~modules/livingRoom/page/livingRoom.page';
-
-
 
 import { ROUTER_KEYS } from '~shared/keys';
 import SearchResultsPage from '~modules/search/Seacrh.page';
 import { Tags } from '~modules/Tags/tags.page';
+import RecommendedCategories from '~modules/ai/RecommendedCategories';
 
 export const publicRoutes = (
 	<Routes>
@@ -28,14 +24,16 @@ export const publicRoutes = (
 		<Route path={ROUTER_KEYS.REGISTRATION} element={<RegisterForm />} />
 		{/* <Route path={ROUTER_KEYS.KITCHEN} element={<KitchenPage />} /> */}
 		<Route path="/products/search" element={<SearchResultsPage />} />
+		<Route
+			path="/recommended-categories"
+			element={<RecommendedCategories />}
+		/>
 		{/* <Route path={ROUTER_KEYS.LIVING_ROOM} element={<LivingRoomPage />} />
 		<Route path={ROUTER_KEYS.BED_ROOM} element={<BedRoomPage />} /> */}
 		<Route path=":categoryName" element={<Tags />} />
 		<Route path={ROUTER_KEYS.ABOUT_US} element={<AboutUsPage />} />
 		<Route path={ROUTER_KEYS.FAVOURITE} element={<FavouritesPage />} />
 		<Route path={ROUTER_KEYS.CART} element={<CartPage />} />
-
-        
 
 		<Route path={ROUTER_KEYS.FIND_US} element={<FindUsPage />} />
 
