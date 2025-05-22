@@ -89,6 +89,7 @@ const AI = () => {
 		if (!categoryIdsStr) return;
 
 		navigate(`/recommended-categories?categoryIds=${categoryIdsStr}`);
+;
 	};
 
 	return (

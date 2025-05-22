@@ -17,17 +17,25 @@ import { ROUTER_KEYS } from '~shared/keys';
 import SearchResultsPage from '~modules/search/Seacrh.page';
 import { Tags } from '~modules/Tags/tags.page';
 import RecommendedCategories from '~modules/ai/RecommendedCategories';
+import CategoryLists from '~shared/components/FakeShop/fakeShop';
+import TovaryPage from '~shared/components/FakeShop/tovary';
+import ProductsPage from '~shared/components/FakeShop/tovary';
+import FilteredProductsPage from '~shared/components/FakeShop/FilteredShop';
 
 export const publicRoutes = (
 	<Routes>
 		<Route path={ROUTER_KEYS.HOME} element={<HomePage />} />
+		<Route path="/fake-shop" element={<CategoryLists />} />
+		<Route path="/products" element={<FilteredProductsPage />} />
+		<Route
+			path="/recommended-categories"
+			element={<FilteredProductsPage />}
+		/>
+
 		<Route path={ROUTER_KEYS.REGISTRATION} element={<RegisterForm />} />
 		{/* <Route path={ROUTER_KEYS.KITCHEN} element={<KitchenPage />} /> */}
 		<Route path="/products/search" element={<SearchResultsPage />} />
-		<Route
-			path="/recommended-categories"
-			element={<RecommendedCategories />}
-		/>
+“
 		{/* <Route path={ROUTER_KEYS.LIVING_ROOM} element={<LivingRoomPage />} />
 		<Route path={ROUTER_KEYS.BED_ROOM} element={<BedRoomPage />} /> */}
 		<Route path=":categoryName" element={<Tags />} />
