@@ -33,7 +33,7 @@ export const Tags = () => {
         setCategories([]);
         setIsLoading(false);
       });
-  }, []);
+  }, [categoryName]);
   
 
   const category = categories.find(item =>
@@ -45,7 +45,7 @@ export const Tags = () => {
     {category && (
       <>
         <BreadCrumbs title={category.title} />
-        <RoomContent categoryId={category.id.toString()} categoryTitle={category.title} categoryDescription={category.description} />
+        <RoomContent categories={categories}  categoryId={category.id.toString()} categoryTitle={category.title} categoryDescription={category.description} />
       </>
     )}
   </div>

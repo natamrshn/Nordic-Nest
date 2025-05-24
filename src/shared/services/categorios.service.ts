@@ -33,7 +33,7 @@ async function deleteCategory(id) {
 // }
 export async function getAllCategories() {
     try {
-        const response = await fetch(BASE_URL);
+        const response = await fetch(`${BASE_URL}?page_size=25`);
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }

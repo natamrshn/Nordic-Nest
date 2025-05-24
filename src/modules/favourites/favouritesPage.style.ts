@@ -49,11 +49,11 @@ export const productCard = css`
     gap: 20px;
 
 	padding: 16px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	transition: box-shadow 0.3s ease;
+	box-shadow: 0px 0px 8px 0px rgba(184, 173, 173, 0.6);
+	transition: background 0.3s ease;
 
 	&:hover {
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	  background: rgba(255, 255, 255, 0.5);
 	}
 `;
 

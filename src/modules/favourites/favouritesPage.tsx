@@ -85,9 +85,7 @@ const FavouritesPage: React.FC = () => {
                 </div>				
 
               
-              <button className={removeButton} onClick={() => toggleFavorite(item)}>
-                x
-              </button>
+              
             </div>
             {successMessage && item.id===lastAddedId && (
               <div style={{ marginBottom: '1rem', color: 'grey', fontWeight: 'bold' }}>
@@ -99,6 +97,10 @@ const FavouritesPage: React.FC = () => {
                 ADD TO CART
               </div>
             </div>
+
+            <button className={removeButton} onClick={() => toggleFavorite(item)}>
+              x
+            </button>
 			    </div>
 			  ))}
 			</div>
