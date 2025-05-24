@@ -128,7 +128,7 @@ const AI = () => {
 							textDecoration: 'underline',
 						}}
 					>
-						Показать категории
+						Show Recommended Categories
 					</button>
 				</div>
 			)}

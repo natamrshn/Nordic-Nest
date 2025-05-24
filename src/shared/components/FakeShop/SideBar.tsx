@@ -1,5 +1,7 @@
-import React from 'react';
-import { Range, getTrackBackground } from 'react-range';
+import React, { useState } from 'react';
+import PriceFilter from './SideBarComponents/PriceFilter';
+import CategoryFilterSection from './SideBarComponents/CategoryFilterSection';
+import AttributeFilterSection from './SideBarComponents/AttributeFilterSection';
 
 interface Category {
 	id: number;
@@ -13,14 +15,14 @@ interface SidebarFilterProps {
 	toggleSelectedId: (id: number) => void;
 	onClose: () => void;
 	isOpen: boolean;
-
 	minPriceLimit: number;
 	maxPriceLimit: number;
 	priceRange: [number, number];
 	setPriceRange: React.Dispatch<React.SetStateAction<[number, number]>>;
+	availableAttributes: { [key: string]: string[] };
+	selectedAttributes: { [key: string]: string[] };
+	toggleAttributeValue: (attrName: string, value: string) => void;
 }
-
-const STEP = 10;
 
 const SidebarFilter: React.FC<SidebarFilterProps> = ({
 	groupedCategories,
@@ -32,7 +34,39 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
 	maxPriceLimit,
 	priceRange,
 	setPriceRange,
+	availableAttributes,
+	selectedAttributes,
+	toggleAttributeValue,
 }) => {
+	const allKeys = [
+		...Object.keys(groupedCategories),
+		...Object.keys(availableAttributes),
+	];
+
+	const [openSections, setOpenSections] = useState(
+		allKeys.reduce(
+			(acc, key) => ({ ...acc, [key]: false }),
+			{} as { [key: string]: boolean },
+		),
+	);
+
+	// const [selectedAttributes, setSelectedAttributes] = useState<{
+	// 	[key: string]: Set<string>;
+	// }>({});
+
+	const toggleSection = (key: string) => {
+		setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
+	};
+
+	// const toggleAttributeValue = (attrName: string, value: string) => {
+	// 	setSelectedAttributes((prev) => {
+	// 		const current = prev[attrName] || new Set<string>();
+	// 		const updated = new Set(current);
+	// 		updated.has(value) ? updated.delete(value) : updated.add(value);
+	// 		return { ...prev, [attrName]: updated };
+	// 	});
+	// };
+
 	return (
 		<div
 			style={{
@@ -60,7 +94,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
 					cursor: 'pointer',
 					padding: '5px',
 				}}
-				title="Закрыть"
+				aria-label="Закрыть фильтр"
 			>
 				<svg width="24" height="24" fill="#333" viewBox="0 0 24 24">
 					<path
@@ -72,100 +106,30 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
 				</svg>
 			</button>
 
-			<h2 style={{ marginTop: '10px' }}>Фильтр</h2>
-			<div style={{ marginTop: '20px' }}>
-				<h3>Цена</h3>
+			<h2 style={{ marginTop: '10px' }}>Filter</h2>
 
-				<Range
-					step={STEP}
-					min={minPriceLimit}
-					max={maxPriceLimit}
-					values={priceRange}
-					onChange={(values) => setPriceRange([values[0], values[1]])}
-					renderTrack={({ props, children }) => (
-						<div
-							{...props}
-							style={{
-								...props.style,
-								height: '6px',
-								width: '100%',
-								background: getTrackBackground({
-									values: priceRange,
-									colors: ['#ccc', '#548bf4', '#ccc'],
-									min: minPriceLimit,
-									max: maxPriceLimit,
-								}),
-								borderRadius: '4px',
-							}}
-						>
-							{children}
-						</div>
-					)}
-					renderThumb={({ props, index }) => (
-						<div
-							{...props}
-							style={{
-								...props.style,
-								height: '24px',
-								width: '24px',
-								backgroundColor: '#548bf4',
-								borderRadius: '50%',
-								display: 'flex',
-								justifyContent: 'center',
-								alignItems: 'center',
-								boxShadow: '0 2px 6px #AAA',
-								cursor: 'pointer',
-							}}
-						>
-							<div
-								style={{
-									position: 'absolute',
-									top: '-28px',
-									color: '#fff',
-									fontWeight: 'bold',
-									fontSize: '12px',
-									fontFamily: 'Arial,Helvetica,sans-serif',
-									padding: '4px',
-									borderRadius: '4px',
-									backgroundColor: '#548bf4',
-								}}
-							>
-								{priceRange[index]}
-							</div>
-						</div>
-					)}
-				/>
+			<PriceFilter
+				priceRange={priceRange}
+				setPriceRange={setPriceRange}
+				minPrice={minPriceLimit}
+				maxPrice={maxPriceLimit}
+			/>
 
-				<p>
-					От {priceRange[0]} до {priceRange[1]}
-				</p>
-      </div>
-      {/* Фильтр по категориям */}
-			{Object.entries(groupedCategories).map(([type, cats]) => (
-				<div key={type} style={{ marginBottom: '16px', marginTop: '20px' }}>
-					<h3>{type}</h3>
-					{cats.map((cat) => (
-						<label
-							key={cat.id}
-							style={{
-								display: 'block',
-								marginBottom: '6px',
-								cursor: 'pointer',
-							}}
-						>
-							<input
-								type="checkbox"
-								checked={selectedIds.includes(cat.id)}
-								onChange={() => toggleSelectedId(cat.id)}
-								style={{ marginRight: '6px' }}
-							/>
-							{cat.title}
-						</label>
-					))}
-				</div>
-			))}
+			<CategoryFilterSection
+				groupedCategories={groupedCategories}
+				selectedIds={selectedIds}
+				toggleSelectedId={toggleSelectedId}
+				openSections={openSections}
+				toggleSection={toggleSection}
+			/>
 
-			{/* Диапазонный ползунок react-range */}
+			<AttributeFilterSection
+				availableAttributes={availableAttributes}
+				selectedAttributes={selectedAttributes}
+				toggleAttributeValue={toggleAttributeValue}
+				openSections={openSections}
+				toggleSection={toggleSection}
+			/>
 		</div>
 	);
 };

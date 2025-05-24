@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import ProductCard from '../productCard/productCard.component';
 import SidebarFilter from './SideBar';
-
-interface Category {
-	id: number;
-	title: string;
-	type: string;
-}
+import FilterButton from './FilteredShopComponents/FilterButton';
+import ProductList from './FilteredShopComponents/ProductList';
 
 interface Product {
 	id: string;
@@ -17,6 +12,11 @@ interface Product {
 	mainImage: string;
 	category: string;
 	isNew: boolean;
+}
+interface Category {
+	id: number;
+	title: string;
+	type: string;
 }
 
 const FilteredProductsPage = () => {
@@ -29,14 +29,19 @@ const FilteredProductsPage = () => {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
-  const [minPriceLimit, setMinPriceLimit] = useState(0);
-  const [maxPriceLimit, setMaxPriceLimit] = useState(1000);
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
+	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+	const [minPriceLimit, setMinPriceLimit] = useState(0);
+	const [maxPriceLimit, setMaxPriceLimit] = useState(1000);
+	const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
+	const [availableAttributes, setAvailableAttributes] = useState<{
+		[key: string]: string[];
+	}>({});
+const [selectedAttributes, setSelectedAttributes] = useState<{
+	[key: string]: string[];
+}>({});
 
 
-	// Загружаем выбранные категории из URL
 	useEffect(() => {
 		const categoryIds = searchParams.get('categoryIds');
 		if (categoryIds) {
@@ -48,7 +53,6 @@ const FilteredProductsPage = () => {
 		}
 	}, [searchParams]);
 
-	// Загружаем категории с сервера
 	useEffect(() => {
 		fetch(
 			'http://ec2-16-16-187-41.eu-north-1.compute.amazonaws.com/categories?page_size=50',
@@ -59,6 +63,7 @@ const FilteredProductsPage = () => {
 			})
 			.then((data) => {
 				setCategories(data.content);
+				setAvailableAttributes(data.availableAttributes || {});
 				const grouped: { [type: string]: Category[] } = {};
 				data.content.forEach((cat: Category) => {
 					if (!grouped[cat.type]) grouped[cat.type] = [];
@@ -69,52 +74,84 @@ const FilteredProductsPage = () => {
 			.catch((err: Error) => console.error(err));
 	}, []);
 
-	// Загружаем продукты по выбранным категориям
-useEffect(() => {
-	if (selectedIds.length === 0) {
-		setProducts([]);
-		setLoading(false);
-		return;
-	}
+	const toggleAttributeValue = (attrName: string, value: string) => {
+		setSelectedAttributes((prev) => {
+			const prevValues = prev[attrName] || [];
+			const isSelected = prevValues.includes(value);
 
-	setLoading(true);
-	setError(null);
-	const idsString = selectedIds.join(',');
-
-	fetch(
-		`http://ec2-16-16-187-41.eu-north-1.compute.amazonaws.com/products/search?categoryIds=${idsString}`,
-	)
-		.then((res) => {
-			if (!res.ok) throw new Error('Ошибка загрузки продуктов');
-			return res.json();
-		})
-		.then((data) => {
-			const loadedProducts: Product[] = Array.isArray(
-				data.products?.content,
-			)
-				? data.products.content
-				: [];
-
-			setProducts(loadedProducts);
-
-			// Определяем min/max цены
-			if (loadedProducts.length > 0) {
-				const prices = loadedProducts.map((p) => p.price);
-				const min = Math.min(...prices);
-				const max = Math.max(...prices);
-				setMinPriceLimit(min);
-				setMaxPriceLimit(max);
-				setPriceRange([min, max]); // Установим по умолчанию весь диапазон
+			let newValues: string[];
+			if (isSelected) {
+				newValues = prevValues.filter((v) => v !== value);
+			} else {
+				newValues = [...prevValues, value];
 			}
 
-			setLoading(false);
-		})
-		.catch((err: Error) => {
-			setError(err.message);
-			setLoading(false);
-		});
-}, [selectedIds]);
+			const newSelected = { ...prev };
+			if (newValues.length > 0) {
+				newSelected[attrName] = newValues;
+			} else {
+				delete newSelected[attrName];
+			}
 
+			console.log('Updated selectedAttributes:', newSelected);
+			return newSelected;
+		});
+	};
+
+	useEffect(() => {
+		if (selectedIds.length === 0) {
+			setProducts([]);
+			setLoading(false);
+			return;
+		}
+
+		setLoading(true);
+		setError(null);
+		const idsString = selectedIds.join(',');
+		const attributesParams = Object.entries(selectedAttributes)
+			.map(([attrName, values]) =>
+				values
+					.map(
+						(value) =>
+							`${encodeURIComponent(attrName)}=${encodeURIComponent(value)}`,
+					)
+					.join('&'),
+			)
+			.join('&');
+
+		let url = `http://ec2-16-16-187-41.eu-north-1.compute.amazonaws.com/products/search?categoryIds=${idsString}`;
+		if (attributesParams) url += `&${attributesParams}`;
+
+		fetch(url)
+			.then((res) => {
+				if (!res.ok) throw new Error('Ошибка загрузки продуктов');
+				return res.json();
+			})
+			.then((data) => {
+				const loadedProducts: Product[] = Array.isArray(
+					data.products?.content,
+				)
+					? data.products.content
+					: [];
+				setProducts(loadedProducts);
+
+				if (data.availableAttributes)
+					setAvailableAttributes(data.availableAttributes);
+
+				if (loadedProducts.length > 0) {
+					const prices = loadedProducts.map((p) => p.price);
+					setMinPriceLimit(Math.min(...prices));
+					setMaxPriceLimit(Math.max(...prices));
+					setPriceRange([Math.min(...prices), Math.max(...prices)]);
+				}
+
+				setLoading(false);
+			})
+			.catch((err: Error) => {
+				setError(err.message);
+				setLoading(false);
+			});
+	}, [selectedIds, selectedAttributes]);
 
 	const toggleSelectedId = (id: number) => {
 		const newSelected = selectedIds.includes(id)
@@ -122,50 +159,18 @@ useEffect(() => {
 			: [...selectedIds, id];
 		setSelectedIds(newSelected);
 		setSearchParams({ categoryIds: newSelected.join(',') });
-  };
-  
-const visibleProducts = products.filter(
-	(product) =>
-		product.price >= priceRange[0] && product.price <= priceRange[1],
-);
+	};
+
+	const visibleProducts = products.filter(
+		(product) =>
+			product.price >= priceRange[0] && product.price <= priceRange[1],
+	);
 
 	return (
 		<div style={{ fontFamily: 'Arial, sans-serif' }}>
-			{/* Кнопка фильтра (открыть) */}
 			{!isSidebarOpen && (
-				<button
-					onClick={() => setIsSidebarOpen(true)}
-					style={{
-						position: 'fixed',
-						top: '140px',
-						left: '20px',
-						zIndex: 1001,
-						padding: '10px',
-						background: '#007bff',
-						color: '#fff',
-						border: 'none',
-						borderRadius: '50%',
-						width: '44px',
-						height: '44px',
-						cursor: 'pointer',
-						display: 'flex',
-						alignItems: 'center',
-						justifyContent: 'center',
-					}}
-					title="Открыть фильтр"
-				>
-					<svg
-						width="20"
-						height="20"
-						fill="white"
-						viewBox="0 0 24 24"
-					>
-						<path d="M3 4h18v2H3V4zm4 6h10v2H7v-2zm2 6h6v2h-6v-2z" />
-					</svg>
-				</button>
+				<FilterButton onClick={() => setIsSidebarOpen(true)} />
 			)}
-
-			{/* 👉 ВСТАВЛЯЕМ SidebarFilter */}
 			<SidebarFilter
 				groupedCategories={groupedCategories}
 				selectedIds={selectedIds}
@@ -176,34 +181,15 @@ const visibleProducts = products.filter(
 				maxPriceLimit={maxPriceLimit}
 				priceRange={priceRange}
 				setPriceRange={setPriceRange}
+				availableAttributes={availableAttributes}
+				selectedAttributes={selectedAttributes}
+				toggleAttributeValue={toggleAttributeValue}
 			/>
-
-			{/* Контент товаров */}
-			<div style={{ padding: '20px', marginTop: '140px' }}>
-				<h2>Результаты</h2>
-				{loading && <div>Загрузка товаров...</div>}
-				{error && <div style={{ color: 'red' }}>Ошибка: {error}</div>}
-				{!loading && products.length === 0 && (
-					<p>Нет товаров по выбранным категориям.</p>
-				)}
-
-				<div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-					{visibleProducts.map((product) => (
-						<ProductCard
-							key={product.id}
-							id={product.id}
-							mainImage={
-								product.mainImage ||
-								'https://via.placeholder.com/250'
-							}
-							title={product.title}
-							price={product.price}
-							category={product.category || 'Uncategorized'}
-							isNew={product.isNew || false}
-						/>
-					))}
-				</div>
-			</div>
+			<ProductList
+				loading={loading}
+				error={error}
+				products={visibleProducts}
+			/>
 		</div>
 	);
 };
