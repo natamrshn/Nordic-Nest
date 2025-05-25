@@ -1,6 +1,7 @@
 export const enum ROUTER_KEYS {
 	ALL_MATCH = '/*',
-	HOME = '/',
+  HOME = '/',
+  REGISTRATION= '/registration',
   ABOUT_US = '/about-us',
   AI = '/ai',
 	PROFILE = '/profile',
@@ -8,7 +9,10 @@ export const enum ROUTER_KEYS {
 	FIND_US = '/find-us',
 	SHOP = '/shop',
 	KITCHEN = '/kitchen',
-	LIVING_ROOM ='/living room'
+	LIVING_ROOM ='/living room',
+	BED_ROOM ='/bedroom',
+	FAVOURITE ='/favourites',
+	CART ='/cart',
 }
 
 export const STORAGE_KEYS = Object.freeze({

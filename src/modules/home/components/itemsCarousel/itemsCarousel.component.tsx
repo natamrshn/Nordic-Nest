@@ -16,7 +16,7 @@ import {
 } from './itemsCarousel.styles';
 
 const products = [
-	{   id:1,
+	{   id:"1",
 		mainImage: img,
 		title: 'Product 1',
 		price: 99,
@@ -24,7 +24,7 @@ const products = [
 		isNew: true,
 	},
 	{
-		id:2,
+		id:"2",
 		mainImage: img,
 		title: 'Product 2',
 		price: 120,
@@ -32,7 +32,7 @@ const products = [
 		isNew: false,
 	},
 	{
-		id:3,
+		id:"3",
 		mainImage: img,
 		title: 'Product 3',
 		price: 80,
@@ -40,7 +40,7 @@ const products = [
 		isNew: true,
 	},
 	{
-		id:4,
+		id:"4",
 		mainImage: img,
 		title: 'Product 4',
 		price: 150,

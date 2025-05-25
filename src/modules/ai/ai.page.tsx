@@ -1,19 +1,94 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { box, button, text } from './ai.styles';
 import { h2 } from '~shared/styles';
+import { Link, useNavigate } from 'react-router-dom';
+import AnimatedProgressList from './AnimatedProgressList';
+
+type ResultType = {
+	searchUrl: string;
+	designParameters: Record<string, number>;
+};
+
+type CategoryType = {
+	id: number;
+	title: string;
+	imageUrl: string; // добавил imageUrl, чтобы показать картинку
+	// другие поля категории можно добавить по необходимости
+};
 
 const AI = () => {
 	const fileInputRef = useRef<HTMLInputElement>(null);
+	const [result, setResult] = useState<ResultType | null>(null);
+	const [categories, setCategories] = useState<CategoryType[]>([]);
+	const [loadingCategories, setLoadingCategories] = useState(false);
+	const [showCategories, setShowCategories] = useState(false);
 
 	const handleButtonClick = () => {
 		fileInputRef.current?.click();
 	};
 
-	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const file = event.target.files?.[0];
-		if (file) {
-			console.log('Выбранный файл:', file.name);
+	const fetchCategory = async (id: number): Promise<CategoryType | null> => {
+		try {
+			const response = await fetch(
+				`http://ec2-16-16-187-41.eu-north-1.compute.amazonaws.com/categories/${id}`,
+			);
+			if (!response.ok) {
+				console.warn(
+					`Не удалось загрузить категорию ${id}: ${response.status}`,
+				);
+				return null;
+			}
+			return await response.json();
+		} catch (error) {
+			console.error('Ошибка загрузки категории:', error);
+			return null;
 		}
+	};
+
+	const handleFileChange = async (
+		event: React.ChangeEvent<HTMLInputElement>,
+	) => {
+		const file = event.target.files?.[0];
+		if (!file) return;
+
+		const formData = new FormData();
+		formData.append('image', file);
+
+		try {
+			const response = await fetch(
+				'http://ec2-16-16-187-41.eu-north-1.compute.amazonaws.com/ai-design/base-recommendation',
+				{
+					method: 'POST',
+					body: formData,
+				},
+			);
+
+			if (!response.ok) {
+				const text = await response.text();
+				throw new Error(`Ошибка: ${response.status} — ${text}`);
+			}
+
+			const data: ResultType = await response.json();
+			setResult(data);
+
+			// Сброс категорий, пока не показаны
+			setCategories([]);
+			setShowCategories(false);
+		} catch (error) {
+			console.error('Ошибка при отправке файла:', error);
+			alert('Ошибка при отправке файла: ' + error);
+		}
+	};
+	const navigate = useNavigate();
+	// По клику загружаем категории и показываем их карточками
+	const handleCategoryClick = () => {
+		if (!result) return;
+
+		const urlParams = new URLSearchParams(result.searchUrl.split('?')[1]);
+		const categoryIdsStr = urlParams.get('categoryIds');
+		if (!categoryIdsStr) return;
+
+		navigate(`/recommended-categories?categoryIds=${categoryIdsStr}`);
 	};
 
 	return (
@@ -30,7 +105,42 @@ const AI = () => {
 				style={{ display: 'none' }}
 				onChange={handleFileChange}
 			/>
-			<button onClick={handleButtonClick} className={button}>Select file</button>
+			<button onClick={handleButtonClick} className={button}>
+				Select file
+			</button>
+
+			{result && (
+				<div style={{ marginTop: '20px' }}>
+					<h3
+						style={{
+							fontWeight: '700',
+							marginBottom: '15px',
+							fontStyle: 'italic',
+							fontSize: '24px',
+						}}
+					>
+						Design Preferences:
+					</h3>
+					<AnimatedProgressList
+						designParameters={result.designParameters}
+					/>
+
+					<button
+						onClick={handleCategoryClick}
+						style={{
+							cursor: 'pointer',
+							background: '#887A7A',
+							color: '#F7F6F4',
+							border: 'none',
+							padding: '15px',
+							width: '350px',
+							fontSize: '24px',
+						}}
+					>
+						Show Recommended Categories
+					</button>
+				</div>
+			)}
 		</div>
 	);
 };
