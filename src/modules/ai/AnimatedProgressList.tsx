@@ -14,7 +14,7 @@ const AnimatedProgressList = ({
 		entries.forEach(([style, value], index) => {
 			setTimeout(() => {
 				setAnimatedValues((prev) => ({ ...prev, [style]: value }));
-			}, index * 600); // задержка 300мс между строками
+			}, index * 700); // задержка 700мс между строками
 		});
 	}, [designParameters]);
 
@@ -28,7 +28,7 @@ const AnimatedProgressList = ({
 						style={{
 							marginBottom: '16px',
 							opacity: animatedValues[style] ? 1 : 0.4,
-							transition: 'opacity 0.5s ease',
+							transition: 'opacity 0.6s ease',
 						}}
 					>
 						<div style={{ marginBottom: '4px' }}>
@@ -38,7 +38,7 @@ const AnimatedProgressList = ({
 							style={{
 								width: '100%',
 								height: '12px',
-								backgroundColor: '#e0e0e0',
+								backgroundColor: '#B8ADAD',
 								borderRadius: '6px',
 								overflow: 'hidden',
 							}}
@@ -47,8 +47,8 @@ const AnimatedProgressList = ({
 								style={{
 									width: `${percent}%`,
 									height: '100%',
-									backgroundColor: '#4caf50',
-									transition: 'width 1s ease-in-out',
+									backgroundColor: '#31251F',
+									transition: 'width 2s ease-in-out',
 								}}
 							/>
 						</div>
