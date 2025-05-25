@@ -37,10 +37,9 @@ const FilteredProductsPage = () => {
 	const [availableAttributes, setAvailableAttributes] = useState<{
 		[key: string]: string[];
 	}>({});
-const [selectedAttributes, setSelectedAttributes] = useState<{
-	[key: string]: string[];
-}>({});
-
+	const [selectedAttributes, setSelectedAttributes] = useState<{
+		[key: string]: string[];
+	}>({});
 
 	useEffect(() => {
 		const categoryIds = searchParams.get('categoryIds');
@@ -165,7 +164,6 @@ const [selectedAttributes, setSelectedAttributes] = useState<{
 		(product) =>
 			product.price >= priceRange[0] && product.price <= priceRange[1],
 	);
-
 	return (
 		<div style={{ fontFamily: 'Arial, sans-serif' }}>
 			{!isSidebarOpen && (

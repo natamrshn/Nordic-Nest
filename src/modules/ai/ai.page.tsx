@@ -89,7 +89,6 @@ const AI = () => {
 		if (!categoryIdsStr) return;
 
 		navigate(`/recommended-categories?categoryIds=${categoryIdsStr}`);
-;
 	};
 
 	return (
@@ -112,7 +111,16 @@ const AI = () => {
 
 			{result && (
 				<div style={{ marginTop: '20px' }}>
-					<h3>Design Preferences:</h3>
+					<h3
+						style={{
+							fontWeight: '700',
+							marginBottom: '15px',
+							fontStyle: 'italic',
+							fontSize: '24px',
+						}}
+					>
+						Design Preferences:
+					</h3>
 					<AnimatedProgressList
 						designParameters={result.designParameters}
 					/>
@@ -121,11 +129,12 @@ const AI = () => {
 						onClick={handleCategoryClick}
 						style={{
 							cursor: 'pointer',
-							color: 'blue',
-							background: 'none',
+							background: '#887A7A',
+							color: '#F7F6F4',
 							border: 'none',
-							padding: 0,
-							textDecoration: 'underline',
+							padding: '15px',
+							width: '350px',
+							fontSize: '24px',
 						}}
 					>
 						Show Recommended Categories

@@ -50,22 +50,10 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
 		),
 	);
 
-	// const [selectedAttributes, setSelectedAttributes] = useState<{
-	// 	[key: string]: Set<string>;
-	// }>({});
-
 	const toggleSection = (key: string) => {
 		setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
 	};
 
-	// const toggleAttributeValue = (attrName: string, value: string) => {
-	// 	setSelectedAttributes((prev) => {
-	// 		const current = prev[attrName] || new Set<string>();
-	// 		const updated = new Set(current);
-	// 		updated.has(value) ? updated.delete(value) : updated.add(value);
-	// 		return { ...prev, [attrName]: updated };
-	// 	});
-	// };
 
 	return (
 		<div

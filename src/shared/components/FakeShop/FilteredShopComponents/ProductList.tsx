@@ -20,11 +20,11 @@ const ProductList = ({
 	products: Product[];
 }) => (
 	<div style={{ padding: '20px', marginTop: '140px' }}>
-		<h2>Результаты</h2>
-		{loading && <div>Загрузка товаров...</div>}
-		{error && <div style={{ color: 'red' }}>Ошибка: {error}</div>}
+		<h2 style={{marginTop: '20px', marginBottom:'20px'}}>Results</h2>
+		{loading && <div>loading</div>}
+		{error && <div style={{ color: 'red' }}>Error {error}</div>}
 		{!loading && products.length === 0 && (
-			<p>Нет товаров по выбранным категориям.</p>
+			<p>No available products</p>
 		)}
 		<div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
 			{products.map((product) => (
