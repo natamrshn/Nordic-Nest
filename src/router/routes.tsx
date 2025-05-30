@@ -25,7 +25,6 @@ import FilteredProductsPage from '~shared/components/FakeShop/FilteredShop';
 export const publicRoutes = (
 	<Routes>
 		<Route path={ROUTER_KEYS.HOME} element={<HomePage />} />
-		<Route path="/fake-shop" element={<CategoryLists />} />
 		<Route path="/products" element={<FilteredProductsPage />} />
 		<Route
 			path="/recommended-categories"
@@ -38,7 +37,7 @@ export const publicRoutes = (
 “
 		{/* <Route path={ROUTER_KEYS.LIVING_ROOM} element={<LivingRoomPage />} />
 		<Route path={ROUTER_KEYS.BED_ROOM} element={<BedRoomPage />} /> */}
-		<Route path=":categoryName" element={<Tags />} />
+		<Route path=":categoryName" element={<FilteredProductsPage />} />
 		<Route path={ROUTER_KEYS.ABOUT_US} element={<AboutUsPage />} />
 		<Route path={ROUTER_KEYS.FAVOURITE} element={<FavouritesPage />} />
 		<Route path={ROUTER_KEYS.CART} element={<CartPage />} />

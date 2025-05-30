@@ -13,6 +13,7 @@ interface Product {
 	category: string;
 	isNew: boolean;
 }
+
 interface Category {
 	id: number;
 	title: string;
@@ -49,6 +50,8 @@ const FilteredProductsPage = () => {
 				.map((id) => parseInt(id, 10))
 				.filter((n) => !isNaN(n));
 			setSelectedIds(ids);
+		} else {
+			setSelectedIds([]);
 		}
 	}, [searchParams]);
 
@@ -98,15 +101,9 @@ const FilteredProductsPage = () => {
 	};
 
 	useEffect(() => {
-		if (selectedIds.length === 0) {
-			setProducts([]);
-			setLoading(false);
-			return;
-		}
-
 		setLoading(true);
 		setError(null);
-		const idsString = selectedIds.join(',');
+
 		const attributesParams = Object.entries(selectedAttributes)
 			.map(([attrName, values]) =>
 				values
@@ -118,8 +115,20 @@ const FilteredProductsPage = () => {
 			)
 			.join('&');
 
-		let url = `http://ec2-16-16-187-41.eu-north-1.compute.amazonaws.com/products/search?categoryIds=${idsString}`;
-		if (attributesParams) url += `&${attributesParams}`;
+		let url =
+			'http://ec2-16-16-187-41.eu-north-1.compute.amazonaws.com/products/search';
+
+		if (selectedIds.length > 0) {
+			url += `?categoryIds=${selectedIds.join(',')}`;
+			if (attributesParams) {
+				url += `&${attributesParams}`;
+			}
+		} else {
+			// Нет категорий — загружаем все товары (с учетом выбранных атрибутов)
+			if (attributesParams) {
+				url += `?${attributesParams}`;
+			}
+		}
 
 		fetch(url)
 			.then((res) => {
@@ -142,6 +151,10 @@ const FilteredProductsPage = () => {
 					setMinPriceLimit(Math.min(...prices));
 					setMaxPriceLimit(Math.max(...prices));
 					setPriceRange([Math.min(...prices), Math.max(...prices)]);
+				} else {
+					setMinPriceLimit(0);
+					setMaxPriceLimit(1000);
+					setPriceRange([0, 1000]);
 				}
 
 				setLoading(false);
@@ -164,6 +177,7 @@ const FilteredProductsPage = () => {
 		(product) =>
 			product.price >= priceRange[0] && product.price <= priceRange[1],
 	);
+
 	return (
 		<div style={{ fontFamily: 'Arial, sans-serif' }}>
 			{!isSidebarOpen && (
